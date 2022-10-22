@@ -10,16 +10,21 @@ const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       screenOptions={{
         tabBarStyle: {
           borderTopWidth: 0,
+          display: "flex",
+          flexDirection: "row",
         },
+        tabBarLabelPosition: "beside-icon",
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
+          tabBarLabel: "Home",
           tabBarIcon: makeIconRender("home-outline"),
           headerShown: false,
         }}
@@ -38,6 +43,7 @@ const TabNavigation = () => {
         options={{
           tabBarIcon: makeIconRender("message-badge-outline"),
           headerShown: false,
+          // tabBarBadge: 1,
         }}
       />
       <Tab.Screen
