@@ -3,8 +3,14 @@ import TabNavigation from './navigation/TabNavigation';
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navigationTheme}>
       <TabNavigation />
     </NavigationContainer>
   );
 }
+
+const navigationTheme = {
+  colors: {
+    background: "transparent",
+  },
+};
