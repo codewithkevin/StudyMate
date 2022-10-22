@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../Screens/HomeScreen";
@@ -8,6 +9,12 @@ import NotificationScreen from "./../Screens/NotificationScreen";
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
+  const [show, setShow] = useState(true);
+
+  const handle = () => {
+    setShow((current) => !current);
+  };
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -17,7 +24,7 @@ const TabNavigation = () => {
           display: "flex",
           flexDirection: "row",
         },
-        tabBarLabelPosition: "beside-icon",
+        // tabBarLabelPosition: "beside-icon",
       }}
     >
       <Tab.Screen
@@ -27,6 +34,7 @@ const TabNavigation = () => {
           tabBarLabel: "Home",
           tabBarIcon: makeIconRender("home-outline"),
           headerShown: false,
+          showLabel: false,
         }}
       />
       <Tab.Screen
