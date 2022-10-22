@@ -2,6 +2,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../Screens/HomeScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
+import CategoryScreen from "./../Screens/CategoryScreen";
+import NotificationScreen from './../Screens/NotificationScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -11,11 +13,21 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ tabBarIcon: makeIconRender("home"), headerShown: false }}
+        options={{ tabBarIcon: makeIconRender("home-outline"), headerShown: false }}
       />
       <Tab.Screen
         name="Settings"
         component={ProfileScreen}
+        options={{ tabBarIcon: makeIconRender("cog"), headerShown: false }}
+      />
+      <Tab.Screen
+        name="Message"
+        component={NotificationScreen}
+        options={{ tabBarIcon: makeIconRender("cog"), headerShown: false }}
+      />
+      <Tab.Screen
+        name="Category"
+        component={CategoryScreen}
         options={{ tabBarIcon: makeIconRender("cog"), headerShown: false }}
       />
     </Tab.Navigator>
