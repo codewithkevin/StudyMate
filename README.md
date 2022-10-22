@@ -17,4 +17,4 @@
 ## 📝 Notes
 
 - This is a very basic example from the [react navigation](https://reactnavigation.org/) docs.
-- [Tab navigation documentation](https://reactnavigation.org/docs/tab-based-navigation).
+- [Tab navigation documentation](https://reactnavigation.org/docs/tab-based-navigation)."# StudyMate" 
