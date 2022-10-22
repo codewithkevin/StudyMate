@@ -13,7 +13,7 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ tabBarIcon: makeIconRender("home"), headerShown: false }}
+        options={{ tabBarIcon: makeIconRender("home-outline"), headerShown: false }}
       />
       <Tab.Screen
         name="Settings"
