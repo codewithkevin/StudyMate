@@ -10,12 +10,35 @@ import {
 import { Zocial } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth();
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
+
+  let validateAndSet = (value, setValue) => {
+    setValue(value);
+  };
+  function checkPassword(firstpassword, secondpassword) {
+    if (firstpassword !== secondpassword) {
+      setValidationMessage("Password do not match");
+    } else setValidationMessage("");
+  }
+  async function createAccount() {
+    email === "" || password === ""
+      ? setValidationMessage("required filled missing")
+      : "";
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigation.navigate("Home");
+    } catch (error) {
+      setValidationMessage(error.message);
+    }
+  }
 
   return (
     <View
@@ -58,7 +81,7 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity
-        //   onPress={createAccount}
+          onPress={createAccount}
           className="items-center mt-10 bg-[#FB5558] p-5 rounded-[30px]"
         >
           <Text className="text-white font-bold text-[15px]">SIGN UP</Text>
