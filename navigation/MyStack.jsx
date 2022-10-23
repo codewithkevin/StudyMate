@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 const MyStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signup">
+      <Stack.Navigator initialRouteName="TabNavigation">
         <Stack.Screen
           options={{ headerShown: false }}
           name="TabNavigation"

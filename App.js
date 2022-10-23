@@ -3,9 +3,10 @@ import TabNavigation from "./navigation/TabNavigation";
 import { View } from "react-native";
 import { Text } from "react-native";
 import MyStack from "./navigation/MyStack";
+import RootNavigation from './navigation/index';
 
 export default function App() {
-  return <MyStack />;
+  return <RootNavigation />;
 }
 
 const navigationTheme = {
