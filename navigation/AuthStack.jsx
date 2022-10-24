@@ -1,16 +1,11 @@
 import { SafeAreaView, View } from "react-native";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  NavigationDarkTheme,
-  DarkTheme,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import SignInScreen from "./../Screens/SignInScreen";
 import SignUpScreen from "./../Screens/SignUpScreen";
 import TabNavigation from "./TabNavigation";
-import OnboardingScreens from './../Screens/OnboardingScreens';
+import OnboardingScreens from "./../Screens/OnboardingScreens";
 
 const Stack = createNativeStackNavigator();
 
