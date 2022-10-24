@@ -45,8 +45,8 @@ const OnboardingScreens = ({ navigation }) => {
       NextButtonComponent={Next}
       DoneButtonComponent={Done}
       DotComponent={Dots}
-      onSkip={() => navigation.replace("Login")}
-      onDone={() => navigation.navigate("Login")}
+      onSkip={() => navigation.replace("singup")}
+      onDone={() => navigation.navigate("singup")}
       pages={[
         {
           backgroundColor: "#a6e4d0",
@@ -62,7 +62,7 @@ const OnboardingScreens = ({ navigation }) => {
           backgroundColor: "#fdeb93",
           image: (
             <Image
-              source={require("../Assest/3d-business-man-and-woman-working-at-the-table.png")}
+              source={require("../Assest/business-3d-young-people-standing-and-talking.png")}
             />
           ),
           title: "Share Your Favorites",
@@ -72,7 +72,7 @@ const OnboardingScreens = ({ navigation }) => {
           backgroundColor: "#e9bcbe",
           image: (
             <Image
-              source={require("../Assest/3d-business-man-and-woman-working-at-the-table.png")}
+              source={require("../Assest/casual-life-3d-planet-earth-2.png")}
             />
           ),
           title: "Become The Star",
@@ -84,11 +84,3 @@ const OnboardingScreens = ({ navigation }) => {
 };
 
 export default OnboardingScreens;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
