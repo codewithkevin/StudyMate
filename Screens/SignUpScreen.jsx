@@ -44,7 +44,8 @@ const SignUpScreen = ({ navigation }) => {
         .catch((err) => {
           console.log(err);
         });
-      navigation.navigate("singin");
+      navigation.navigate("profile");
+      alert("Hello")
     } catch (error) {
       setValidationMessage(error.message);
     }
