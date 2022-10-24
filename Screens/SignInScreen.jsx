@@ -14,7 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { db } from "../firebase";
 
 const auth = getAuth();
@@ -24,29 +24,18 @@ const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [validationMessage, setValidationMessage] = useState("");
+  const [validationMessage, setvalidationMessage] = useState("");
 
-  let validateAndSet = (value, setValue) => {
-    setValue(value);
-  };
-
-  async function createAccount() {
-    email === "" || password === ""
-      ? setValidationMessage("required filled missing")
-      : "";
+  async function login() {
+    if (email === "" || password === "") {
+      setvalidationMessage("required filled missing");
+      return;
+    }
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      const userRef = collection(db, "Account");
-      addDoc(userRef, { name, email, password, id })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      navigation.navigate("Home");
+      await signInWithEmailAndPassword(auth, email, password);
+      navigation.navigate("HomeScreen");
     } catch (error) {
-      setValidationMessage(error.message);
+      setvalidationMessage(error.message);
     }
   }
 
@@ -84,7 +73,6 @@ const SignInScreen = ({ navigation }) => {
               secureTextEntry={true}
             />
             <TouchableOpacity
-              onPress={createAccount}
               className="mt-2 rounded-[15px]"
             >
               <Text className="text-black  text-right font-medium text-[15px]">
@@ -94,7 +82,7 @@ const SignInScreen = ({ navigation }) => {
           </View>
 
           <TouchableOpacity
-            onPress={createAccount}
+            onPress={login}
             className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
           >
             <Text className="text-white font-bold text-[15px]">Login</Text>
