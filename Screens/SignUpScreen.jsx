@@ -8,6 +8,8 @@ import {
   TextInput,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
@@ -18,6 +20,7 @@ import { db } from "../firebase";
 const auth = getAuth();
 
 const SignUpScreen = ({ navigation }) => {
+  let id = uuidv4()
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +37,7 @@ const SignUpScreen = ({ navigation }) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       const userRef = collection(db, "Account");
-      addDoc(userRef, { name, email, password })
+      addDoc(userRef, { name, email, password, id })
         .then((response) => {
           console.log(response);
         })
