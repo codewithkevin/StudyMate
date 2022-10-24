@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { getAuth, signOut } from "firebase/auth";
-import { useAuthentication } from "./../Hooks/useAuthentication";
+import { useAuthentication } from "../Hooks/useAuthentication";
 
 const auth = getAuth();
 
