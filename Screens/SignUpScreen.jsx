@@ -7,7 +7,8 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
-import { Zocial } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
@@ -48,7 +49,11 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <View className="flex-1 h-full w-full" style={styles.container}>
-      <View className="mt-[140px] ml-12 mb-5">
+      <View className="mt-[10px] ml-12 mb-5">
+        <Image
+          className="mb-[10] mt-10 w-24 h-[125px]"
+          source={require("../Assest/sammy-no-connection.png")}
+        />
         <Text className="font-medium text-2xl">Hello There</Text>
         <Text className="text-gray-400 w-64">
           Enter your Information bellow or sign up with a social media account
@@ -84,6 +89,7 @@ const SignUpScreen = ({ navigation }) => {
               containerStyle={{ marginTop: 10 }}
               value={password}
               onChangeText={(text) => setPassword(text)}
+              secureTextEntry
               secureTextEntry={true}
             />
           </View>
@@ -102,9 +108,11 @@ const SignUpScreen = ({ navigation }) => {
           </View> */}
           <TouchableOpacity
             onPress={createAccount}
-            className="items-center mt-10 bg-[#FB5558] p-5 rounded-[30px]"
+            className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
           >
-            <Text className="text-white font-bold text-[15px]">SIGN UP</Text>
+            <Text className="text-white font-bold text-[15px]">
+              Get Started
+            </Text>
           </TouchableOpacity>
           {
             <Text className="text-center" style={styles.error}>
@@ -112,47 +120,39 @@ const SignUpScreen = ({ navigation }) => {
             </Text>
           }
 
-          <View className="mt-10">
-            <Text className="text-sm text-center text-gray-400 font-bold">
-              or continue with
-            </Text>
-            <View className="flex justify-between flex-row">
-              <TouchableOpacity className="items-center mt-10 bg-blue-600 p-5 rounded-[30px]">
-                <View className="flex flex-row space-x-2">
-                  <Zocial
-                    name={"facebook"}
-                    color={"white"}
-                    size={20}
-                    // onPress={toggleIsLoading}
-                  />
-                  <Text className="text-white font-light mt-1 text-[15px]">
-                    FACEBOOK
-                  </Text>
+          <View className="mt-2">
+            <Text className="text-lg text-center">Or</Text>
+            <View className="flex justify-evenly flex-row mt-2">
+              <TouchableOpacity className="items-center  bg-blue-600 p-5 rounded-full">
+                <View className="flex">
+                  <FontAwesome5 name="facebook" size={24} color="white" />
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity className="items-center mt-10 bg-gray-300 p-5 rounded-[30px]">
-                <View className="flex flex-row space-x-2">
+              <TouchableOpacity className="items-center  bg-gray-300 p-5 rounded-full">
+                <View className="flex">
                   <Fontisto
                     name={"google"}
                     color={"blue"}
-                    size={20}
+                    size={24}
                     // onPress={toggleIsLoading}
                   />
-                  <Text className="text-black font-light text-[15px]">
-                    Google
-                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity className="items-center  bg-gray-300 p-5 rounded-full">
+                <View className="flex">
+                  <AntDesign name="apple1" size={24} color="black" />
                 </View>
               </TouchableOpacity>
             </View>
 
-            <View className="mt-10 items-center">
-              <View>
-                <Text className="flex">Don't have an account?</Text>
+            <View className="mt-10 items-center flex justify-center">
+              <View className="flex flex-row space-x-2">
+                <Text className="flex">Already Have An Account?</Text>
                 <TouchableOpacity
                   onPress={() => navigation.navigate("singin")}
-                  className="mt-3 items-center"
+                  className="items-center"
                 >
-                  <Text className="text-blue-400 font-bold">SIGN IN</Text>
+                  <Text className="text-[#075ADE] font-bold">Sign In</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -166,13 +166,6 @@ const SignUpScreen = ({ navigation }) => {
 export default SignUpScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    // // flex: 1,
-    // backgroundColor: "#fff",
-    // alignItems: "center",
-    // justifyContent: "center",
-    // bottom: 50,
-  },
   error: {
     marginTop: 10,
     color: "red",
