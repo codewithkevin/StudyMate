@@ -10,14 +10,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignInScreen from "./../Screens/SignInScreen";
 import SignUpScreen from "./../Screens/SignUpScreen";
 import TabNavigation from "./TabNavigation";
-import ScreenOne from './../Components/SetUpScreens/ScreenOne';
+import OnboardingScreens from './../Screens/OnboardingScreens';
 
 const Stack = createNativeStackNavigator();
 
 export default function AuthStack() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="singup">
+      <Stack.Navigator initialRouteName="setup">
         <Stack.Screen
           options={{ headerShown: false }}
           name="singin"
@@ -26,7 +26,7 @@ export default function AuthStack() {
         <Stack.Screen
           options={{ headerShown: false }}
           name="setup"
-          component={ScreenOne}
+          component={OnboardingScreens}
         />
         <Stack.Screen
           options={{ headerShown: false }}
