@@ -52,7 +52,7 @@ const OnboardingScreens = ({ navigation }) => {
           backgroundColor: "#a6e4d0",
           image: (
             <Image
-              source={require("../Assest/3d-business-man-and-woman-working-at-the-table.png")}
+              source={require("../Assest/casual-life-3d-planet-earth-2.png")}
             />
           ),
           title: "Connect to the World",
@@ -65,17 +65,17 @@ const OnboardingScreens = ({ navigation }) => {
               source={require("../Assest/business-3d-young-people-standing-and-talking.png")}
             />
           ),
-          title: "Share Your Favorites",
+          title: "Share Your Ideas",
           subtitle: "Share Your Thoughts With Similar Kind of People",
         },
         {
           backgroundColor: "#e9bcbe",
           image: (
             <Image
-              source={require("../Assest/casual-life-3d-planet-earth-2.png")}
+              source={require("../Assest/3d-business-man-and-woman-working-at-the-table.png")}
             />
           ),
-          title: "Become The Star",
+          title: "Find A Study Buddy",
           subtitle: "Let The Spot Light Capture You",
         },
       ]}
