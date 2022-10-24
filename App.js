@@ -4,7 +4,28 @@ import { View } from "react-native";
 import { Text } from "react-native";
 import MyStack from "./navigation/MyStack";
 import RootNavigation from "./navigation/index";
+import LoadingScreen from "./Screens/LoadingScreen";
+import { LogBox } from "react-native";
+import { useState, useEffect } from "react";
 
 export default function App() {
-  return <RootNavigation />;
+  LogBox.ignoreAllLogs();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
+
+  return (
+    <View className="flex-1">
+      {loading === false ? (
+        <View className="flex-1">
+          <RootNavigation />
+        </View>
+      ) : (
+        <LoadingScreen />
+      )}
+    </View>
+  );
 }
