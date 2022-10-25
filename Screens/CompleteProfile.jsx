@@ -1,14 +1,23 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Button,
+  Image,
+} from "react-native";
 import React, { useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../firebase";
+import * as ImagePicker from "expo-image-picker";
 
 const CompleteProfile = () => {
   const [validationMessage, setValidationMessage] = useState("");
   const [gender, setGender] = useState("");
+  const [image, setImage] = useState(null);
 
   //ROutes
   const route = useRoute();
@@ -39,23 +48,33 @@ const CompleteProfile = () => {
     }
   }
 
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   return (
     <View className="p-5 mt-10">
-      <Text>CompleteProfile</Text>
-      <TextInput
-        className="bg-gray-100 border border-gray-400 text-black text-sm rounded-[20px] block w-full p-4 placeholder-black"
-        placeholder="Full name"
-        placeholderTextColor="#000"
-        containerStyle={{ marginTop: 10, backgroundColor: "white" }}
-        value={gender}
-        onChangeText={(text) => setGender(text)}
-      />
-      <TouchableOpacity
-        onPress={createAccount}
-        className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
-      >
-        <Text className="text-white font-bold text-[15px]">Get Started</Text>
-      </TouchableOpacity>
+      <View>
+        <Text className="mb-3 text-2xl">Complete Profile</Text>
+      </View>
+      <View >
+        <Button title="Pick an image from camera roll" onPress={pickImage} />
+        {image && (
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        )}
+      </View>
     </View>
   );
 };

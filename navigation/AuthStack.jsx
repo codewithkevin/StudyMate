@@ -7,6 +7,7 @@ import SignUpScreen from "./../Screens/SignUpScreen";
 import TabNavigation from "./TabNavigation";
 import OnboardingScreens from "./../Screens/OnboardingScreens";
 import CompleteProfile from './../Screens/CompleteProfile';
+import Profile from './Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,15 +25,16 @@ export default function AuthStack() {
           name="setup"
           component={OnboardingScreens}
         />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="singup"
-          component={SignUpScreen}
-        />
+        
         <Stack.Screen
           options={{ headerShown: false }}
           name="profile"
           component={CompleteProfile}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="singup"
+          component={Profile}
         />
       </Stack.Navigator>
     </NavigationContainer>
