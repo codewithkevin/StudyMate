@@ -7,6 +7,7 @@ import HomeScreen from "../Screens/HomeScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
 import CategoryScreen from "./../Screens/CategoryScreen";
 import NotificationScreen from "./../Screens/NotificationScreen";
+import Profile from './../Screens/Profile/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -60,7 +61,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Settings"
-        component={ProfileScreen}
+        component={Profile}
         options={{
           tabBarLabel: "",
           tabBarIcon: Icon("person"),
