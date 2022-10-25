@@ -6,6 +6,7 @@ import SignInScreen from "./../Screens/SignInScreen";
 import SignUpScreen from "./../Screens/SignUpScreen";
 import TabNavigation from "./TabNavigation";
 import OnboardingScreens from "./../Screens/OnboardingScreens";
+import CompleteProfile from './../Screens/CompleteProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,8 +31,8 @@ export default function AuthStack() {
         />
         <Stack.Screen
           options={{ headerShown: false }}
-          name="Home"
-          component={TabNavigation}
+          name="profile"
+          component={CompleteProfile}
         />
       </Stack.Navigator>
     </NavigationContainer>
