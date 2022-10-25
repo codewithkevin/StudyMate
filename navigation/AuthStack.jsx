@@ -30,11 +30,6 @@ export default function AuthStack() {
           name="singup"
           component={SignUpScreen}
         />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Home"
-          component={TabNavigation}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -20,7 +20,7 @@ import { db } from "../firebase";
 const auth = getAuth();
 
 const SignUpScreen = ({ navigation }) => {
-  let id = uuidv4();
+  let id = uuidv4()
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -44,6 +44,7 @@ const SignUpScreen = ({ navigation }) => {
         .catch((err) => {
           console.log(err);
         });
+      navigation.navigate("Login");
     } catch (error) {
       setValidationMessage(error.message);
     }

@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 const MyStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="profile">
+      <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
           name="TabNavigation"
