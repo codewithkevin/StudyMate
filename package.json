@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@react-native-community/datetimepicker": "6.2.0",
     "@react-native-masked-view/masked-view": "0.2.7",
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/native": "^6.0.13",
@@ -45,5 +46,4 @@
       ]
     ]
   }
-
 }
