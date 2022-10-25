@@ -68,7 +68,7 @@ const CompleteProfile = () => {
   return (
     <View className="p-5 mt-10">
       <View>
-        <Text className="mb-3 text-2xl">Complete Profile</Text>
+        <Text className="mb-5 text-center text-2xl">Complete Profile</Text>
       </View>
       <View className="flex justify-center items-center static">
         {image ? (
@@ -87,7 +87,6 @@ const CompleteProfile = () => {
           />
         )}
         <View className="absolute bottom-0 right-24 ...">
-          {/* <Button title="Pick an image from camera roll" onPress={pickImage} /> */}
           <TouchableOpacity
             onPress={pickImage}
             className="bg-gray-200 p-3 rounded-full"
