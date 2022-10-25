@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../Screens/HomeScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
@@ -24,14 +26,14 @@ const TabNavigation = () => {
           display: "flex",
           flexDirection: "row",
         },
-        // tabBarLabelPosition: "beside-icon",
+        tabBarLabelPosition: "beside-icon",
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "",
           tabBarIcon: makeIconRender("home-outline"),
           headerShown: false,
           showLabel: false,
@@ -41,6 +43,7 @@ const TabNavigation = () => {
         name="Category"
         component={CategoryScreen}
         options={{
+          tabBarLabel: "",
           tabBarIcon: makeIconRender("dots-grid"),
           headerShown: false,
         }}
@@ -49,6 +52,7 @@ const TabNavigation = () => {
         name="Message"
         component={NotificationScreen}
         options={{
+          tabBarLabel: "",
           tabBarIcon: makeIconRender("message-badge-outline"),
           headerShown: false,
           // tabBarBadge: 1,
@@ -57,7 +61,11 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Settings"
         component={ProfileScreen}
-        options={{ tabBarIcon: makeIconRender("cog"), headerShown: false }}
+        options={{
+          tabBarLabel: "",
+          tabBarIcon: Icon("person"),
+          headerShown: false,
+        }}
       />
     </Tab.Navigator>
   );
@@ -68,5 +76,11 @@ export default TabNavigation;
 function makeIconRender(name) {
   return ({ color, size }) => (
     <MaterialCommunityIcons name={name} color={color} size={size} />
+  );
+}
+
+function Icon(name) {
+  return ({ color, size }) => (
+    <Octicons name={name} color={color} size={size} />
   );
 }
