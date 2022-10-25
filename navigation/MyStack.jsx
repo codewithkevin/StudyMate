@@ -4,8 +4,6 @@ import React from "react";
 import TabNavigation from "./TabNavigation";
 import SignInScreen from "./../Screens/SignInScreen";
 import SignUpScreen from "./../Screens/SignUpScreen";
-import GeneralProfile from './../Components/AccountProfile/GeneralProfile';
-import InterestScreen from './../Components/AccountProfile/InterestScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,16 +15,6 @@ const MyStack = () => {
           options={{ headerShown: false }}
           name="TabNavigation"
           component={TabNavigation}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="profile"
-          component={GeneralProfile}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="interest"
-          component={InterestScreen}
         />
         <Stack.Screen
           options={{ headerShown: false }}
