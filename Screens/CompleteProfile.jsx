@@ -11,6 +11,7 @@ import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { AntDesign } from "@expo/vector-icons";
 import { db } from "../firebase";
 import * as ImagePicker from "expo-image-picker";
 
@@ -69,11 +70,31 @@ const CompleteProfile = () => {
       <View>
         <Text className="mb-3 text-2xl">Complete Profile</Text>
       </View>
-      <View >
-        <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+      <View className="flex justify-center items-center static">
+        {image ? (
+          <Image
+            source={{
+              uri: image,
+            }}
+            className="rounded-full w-[200] h-[200] border-gray-900"
+          />
+        ) : (
+          <Image
+            source={{
+              uri: `https://images.unsplash.com/photo-1662581871625-7dbd3ac1ca18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80`,
+            }}
+            className="rounded-full w-[200] h-[200]"
+          />
         )}
+        <View className="absolute bottom-0 right-24 ...">
+          {/* <Button title="Pick an image from camera roll" onPress={pickImage} /> */}
+          <TouchableOpacity
+            onPress={pickImage}
+            className="bg-gray-200 p-3 rounded-full"
+          >
+            <AntDesign name="camerao" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
