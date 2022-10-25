@@ -16,11 +16,6 @@ const MyStack = () => {
           name="TabNavigation"
           component={TabNavigation}
         />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Login"
-          component={SignInScreen}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );

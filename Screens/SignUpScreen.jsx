@@ -20,7 +20,7 @@ import { db } from "../firebase";
 const auth = getAuth();
 
 const SignUpScreen = ({ navigation }) => {
-  let id = uuidv4()
+  let id = uuidv4();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -35,8 +35,8 @@ const SignUpScreen = ({ navigation }) => {
       ? setValidationMessage("required filled missing")
       : "";
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      const userRef = collection(db, "Account");
+      // await createUserWithEmailAndPassword(auth, email, password);
+      const userRef = collection(db, "Test");
       addDoc(userRef, { name, email, password, id })
         .then((response) => {
           console.log(response);
@@ -44,7 +44,12 @@ const SignUpScreen = ({ navigation }) => {
         .catch((err) => {
           console.log(err);
         });
-      navigation.navigate("Login");
+      navigation.navigate("profile", {
+        email: email,
+        auth: auth,
+        password: password,
+        name: name,
+      });
     } catch (error) {
       setValidationMessage(error.message);
     }

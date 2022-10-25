@@ -6,8 +6,7 @@ import SignInScreen from "./../Screens/SignInScreen";
 import SignUpScreen from "./../Screens/SignUpScreen";
 import TabNavigation from "./TabNavigation";
 import OnboardingScreens from "./../Screens/OnboardingScreens";
-import GeneralProfile from "./../Components/AccountProfile/GeneralProfile";
-import InterestScreen from "./../Components/AccountProfile/InterestScreen";
+import CompleteProfile from './../Screens/CompleteProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +28,11 @@ export default function AuthStack() {
           options={{ headerShown: false }}
           name="singup"
           component={SignUpScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="profile"
+          component={CompleteProfile}
         />
       </Stack.Navigator>
     </NavigationContainer>
