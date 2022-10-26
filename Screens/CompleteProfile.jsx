@@ -24,12 +24,8 @@ const CompleteProfile = () => {
   const [image, setImage] = useState(null);
 
   const [datePicker, setDatePicker] = useState(false);
-
   const [date, setDate] = useState(new Date());
-
-  const [timePicker, setTimePicker] = useState(false);
-
-  const [time, setTime] = useState(new Date(Date.now()));
+  const [clicked, setClicked] = useState(true);
 
   function showDatePicker() {
     setDatePicker(true);
@@ -37,6 +33,7 @@ const CompleteProfile = () => {
 
   function onDateSelected(event, value) {
     setDate(value);
+    setClicked(false);
     setDatePicker(false);
   }
 
@@ -123,7 +120,7 @@ const CompleteProfile = () => {
         </View>
       </View>
       <View>
-        <View className="mb-7 mt-4">
+        <View className="mb-5 mt-4">
           <TextInput
             className="bg-gray-200 border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
             placeholder="UserName"
@@ -134,11 +131,38 @@ const CompleteProfile = () => {
           />
         </View>
 
+        <View className="mb-5">
+          <View className="relative">
+            <TextInput
+              className="bg-gray-200 border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
+              placeholder={clicked ? "Date Of Birth" : date.toDateString()}
+              placeholderTextColor="#000"
+              containerStyle={{ marginTop: 10, backgroundColor: "white" }}
+              required
+            />
+            <TouchableOpacity onPress={showDatePicker}>
+              <Text className="text-white absolute right-2.5 bottom-2.5   focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2">
+                <AntDesign name="camerao" size={24} color="black" />
+              </Text>
+            </TouchableOpacity>
+            {datePicker && (
+              <DateTimePicker
+                value={date}
+                mode={"date"}
+                display={Platform.OS === "ios" ? "spinner" : "default"}
+                is24Hour={true}
+                onChange={onDateSelected}
+                style={styleSheet.datePicker}
+              />
+            )}
+          </View>
+        </View>
+
         <View>
           <View className="relative">
             <TextInput
               className="bg-gray-200 border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
-              placeholder={date.toDateString()}
+              placeholder={clicked ? "Date Of Birth" : date.toDateString()}
               placeholderTextColor="#000"
               containerStyle={{ marginTop: 10, backgroundColor: "white" }}
               required
