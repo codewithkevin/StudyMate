@@ -13,6 +13,7 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.6",
+    "react-native-country-codes-picker": "^2.1.8",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-get-random-values": "^1.8.0",
     "react-native-image-picker": "^4.10.0",

@@ -16,12 +16,16 @@ import { AntDesign } from "@expo/vector-icons";
 import { db } from "../firebase";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as ImagePicker from "expo-image-picker";
+import { CountryPicker } from "react-native-country-codes-picker";
 
 const CompleteProfile = () => {
   const [validationMessage, setValidationMessage] = useState("");
   const [gender, setGender] = useState("");
   const [username, setUsername] = useState("");
   const [image, setImage] = useState(null);
+  const [show, setShow] = useState(false);
+  const [countryCode, setCountryCode] = useState("");
+  const [number, setNumber] = useState("");
 
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -36,6 +40,8 @@ const CompleteProfile = () => {
     setClicked(false);
     setDatePicker(false);
   }
+
+  const completed = countryCode + number;
 
   //ROutes
   const route = useRoute();
@@ -53,7 +59,14 @@ const CompleteProfile = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       const userRef = collection(db, "AccountProfile");
-      addDoc(userRef, { gender, email, password, name })
+      addDoc(userRef, {
+        email,
+        password,
+        name,
+        date,
+        completed,
+        username,
+      })
         .then((response) => {
           console.log(response);
         })
@@ -158,31 +171,40 @@ const CompleteProfile = () => {
           </View>
         </View>
 
-        <View>
+        <View className="mb-5">
           <View className="relative">
             <TextInput
-              className="bg-gray-200 border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
-              placeholder={clicked ? "Date Of Birth" : date.toDateString()}
+              className="bg-gray-200 text-center border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
+              placeholder={show ? countryCode : "Phone Number"}
               placeholderTextColor="#000"
+              value={number}
+              onChangeText={(text) => setNumber(text)}
               containerStyle={{ marginTop: 10, backgroundColor: "white" }}
               required
             />
-            <TouchableOpacity onPress={showDatePicker}>
-              <Text className="text-white absolute right-2.5 bottom-2.5   focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2">
-                <AntDesign name="camerao" size={24} color="black" />
+            <TouchableOpacity onPress={() => setShow(true)}>
+              <Text className="text-black absolute mt-1 left-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2">
+                {countryCode}
               </Text>
             </TouchableOpacity>
-            {datePicker && (
-              <DateTimePicker
-                value={date}
-                mode={"date"}
-                display={Platform.OS === "ios" ? "spinner" : "default"}
-                is24Hour={true}
-                onChange={onDateSelected}
-                style={styleSheet.datePicker}
-              />
-            )}
+            <CountryPicker
+              show={show}
+              // when picker button press you will get the country object with dial code
+              pickerButtonOnPress={(item) => {
+                setCountryCode(item.dial_code);
+                setShow(false);
+              }}
+            />
           </View>
+        </View>
+
+        <View className="flex flex-row justify-center mt-10 bg-blue">
+          <TouchableOpacity
+            onPress={createAccount}
+            className="bg-blue-400 p-3 rounded-full items-center"
+          >
+            <AntDesign name="camerao" size={44} color="white" />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
