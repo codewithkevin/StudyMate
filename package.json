@@ -1,18 +1,22 @@
 {
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@react-native-community/datetimepicker": "6.2.0",
     "@react-native-masked-view/masked-view": "0.2.7",
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.1",
     "expo": "^46.0.0",
+    "expo-image-picker": "~13.3.1",
     "firebase": "^9.12.1",
     "nativewind": "^2.0.11",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.6",
+    "react-native-country-codes-picker": "^2.1.8",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-get-random-values": "^1.8.0",
+    "react-native-image-picker": "^4.10.0",
     "react-native-onboarding-swiper": "^1.2.0",
     "react-native-reanimated": "~2.9.1",
     "react-native-safe-area-context": "4.3.1",
@@ -32,5 +36,15 @@
   },
   "private": true,
   "version": "1.0.0",
-  "name": "my-react-app"
+  "name": "my-react-app",
+  "expo": {
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ]
+  }
 }

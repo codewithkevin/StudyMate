@@ -35,15 +35,15 @@ const SignUpScreen = ({ navigation }) => {
       ? setValidationMessage("required filled missing")
       : "";
     try {
-      // await createUserWithEmailAndPassword(auth, email, password);
-      const userRef = collection(db, "Test");
-      addDoc(userRef, { name, email, password, id })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // // await createUserWithEmailAndPassword(auth, email, password);
+      // const userRef = collection(db, "Test");
+      // addDoc(userRef, { name, email, password, id })
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
       navigation.navigate("profile", {
         email: email,
         auth: auth,
@@ -56,7 +56,7 @@ const SignUpScreen = ({ navigation }) => {
   }
 
   return (
-    <View className="flex-1 h-full w-full" style={styles.container}>
+    <KeyboardAvoidingView className="flex-1 h-full w-full" style={styles.container}>
       <View className="mt-[10px] ml-12 mb-5">
         <Image
           className="mb-[10] mt-10 w-24 h-[125px]"
@@ -167,7 +167,7 @@ const SignUpScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
