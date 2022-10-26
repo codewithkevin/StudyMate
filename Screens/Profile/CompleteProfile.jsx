@@ -10,13 +10,17 @@ import {
 import React, { useState } from "react";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
-import { collection, addDoc } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { AntDesign } from "@expo/vector-icons";
-import { db } from "../firebase";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as ImagePicker from "expo-image-picker";
 import { CountryPicker } from "react-native-country-codes-picker";
+
+//Firebase Import API
+import { collection, addDoc } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "./../../firebase";
+
+//Icons Support
+import { AntDesign } from "@expo/vector-icons";
 
 const CompleteProfile = () => {
   const [validationMessage, setValidationMessage] = useState("");
@@ -26,22 +30,11 @@ const CompleteProfile = () => {
   const [show, setShow] = useState(false);
   const [countryCode, setCountryCode] = useState("");
   const [number, setNumber] = useState("");
-
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
   const [clicked, setClicked] = useState(true);
 
-  function showDatePicker() {
-    setDatePicker(true);
-  }
-
-  function onDateSelected(event, value) {
-    setDate(value);
-    setClicked(false);
-    setDatePicker(false);
-  }
-
-  const completed = countryCode + number;
+  const PhoneNumbaer = `${countryCode} +  ${setCountryCode}`;
 
   //ROutes
   const route = useRoute();
@@ -52,6 +45,7 @@ const CompleteProfile = () => {
   const password = route.params.password;
   const name = route.params.name;
 
+  //Function To Create Firebase Account and db
   async function createAccount() {
     email === "" || password === ""
       ? setValidationMessage("required filled missing")
@@ -79,6 +73,7 @@ const CompleteProfile = () => {
     }
   }
 
+  //Function to call Image Picker
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -94,6 +89,18 @@ const CompleteProfile = () => {
       setImage(result.uri);
     }
   };
+
+  //Fuction To show date
+  function showDatePicker() {
+    setDatePicker(true);
+  }
+
+  //Function to display date
+  function onDateSelected(event, value) {
+    setDate(value);
+    setClicked(false);
+    setDatePicker(false);
+  }
 
   return (
     <View className="p-5 mt-10">
