@@ -7,15 +7,19 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import React, { useState } from "react";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+
+//Import Icons for Support
+import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
-import React, { useState } from "react";
+
+//Firebase Import
 import { collection, addDoc } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { db } from "../firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { db } from "./../../firebase";
 
 const auth = getAuth();
 
@@ -56,11 +60,14 @@ const SignUpScreen = ({ navigation }) => {
   }
 
   return (
-    <KeyboardAvoidingView className="flex-1 h-full w-full" style={styles.container}>
+    <KeyboardAvoidingView
+      className="flex-1 h-full w-full"
+      style={styles.container}
+    >
       <View className="mt-[10px] ml-12 mb-5">
         <Image
           className="mb-[10] mt-10 w-24 h-[125px]"
-          source={require("../Assest/sammy-no-connection.png")}
+          source={require("./Assest/sammy-no-connection.png")}
         />
         <Text className="font-medium text-2xl">Hello There</Text>
         <Text className="text-gray-400 w-64">

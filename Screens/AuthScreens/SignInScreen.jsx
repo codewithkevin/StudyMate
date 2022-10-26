@@ -7,15 +7,19 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import React, { useState } from "react";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+
+//Import Icons for Support
+import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
-import React, { useState } from "react";
+
+//Firebase Import
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { db } from "../firebase";
+import { db } from "./../../firebase";
 
 const auth = getAuth();
 
@@ -44,7 +48,7 @@ const SignInScreen = ({ navigation }) => {
       <View className="mt-[10px] ml-12">
         <Image
           className="mb-[5] mt-10 w-24 h-[125px]"
-          source={require("../Assest/sammy-no-connection.png")}
+          source={require("./Assest/sammy-no-connection.png")}
         />
         <Text className="font-medium text-2xl">Welcome</Text>
         <Text className="text-gray-400 w-64">Input your details here</Text>
@@ -72,9 +76,7 @@ const SignInScreen = ({ navigation }) => {
               secureTextEntry
               secureTextEntry={true}
             />
-            <TouchableOpacity
-              className="mt-2 rounded-[15px]"
-            >
+            <TouchableOpacity className="mt-2 rounded-[15px]">
               <Text className="text-black  text-right font-medium text-[15px]">
                 Forgot Password?
               </Text>
