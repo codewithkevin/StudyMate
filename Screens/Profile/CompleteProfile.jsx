@@ -177,6 +177,7 @@ const CompleteProfile = ({ navigation }) => {
                 setValue={setValue}
                 setItems={setItems}
               />
+              
             </View>
           </View>
         </View>
