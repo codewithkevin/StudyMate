@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as ImagePicker from "expo-image-picker";
 import { CountryPicker } from "react-native-country-codes-picker";
+import DropDownPicker from "react-native-dropdown-picker";
 
 //Firebase Import API
 import { collection, addDoc } from "firebase/firestore";
@@ -22,7 +23,7 @@ import { db } from "./../../firebase";
 //Icons Support
 import { AntDesign } from "@expo/vector-icons";
 
-const CompleteProfile = () => {
+const CompleteProfile = ({ navigation }) => {
   const [validationMessage, setValidationMessage] = useState("");
   const [gender, setGender] = useState("");
   const [username, setUsername] = useState("");
@@ -33,6 +34,12 @@ const CompleteProfile = () => {
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
   const [clicked, setClicked] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+  ]);
 
   const PhoneNumber = countryCode.concat(setNumber);
 
@@ -47,9 +54,6 @@ const CompleteProfile = () => {
 
   //Function To Create Firebase Account and db
   async function createAccount() {
-    email === "" || password === ""
-      ? setValidationMessage("required filled missing")
-      : "";
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       const userRef = collection(db, "AccountProfile");
@@ -59,6 +63,7 @@ const CompleteProfile = () => {
         name,
         PhoneNumber,
         username,
+        items,
       })
         .then((response) => {
           console.log(response);
@@ -66,7 +71,6 @@ const CompleteProfile = () => {
         .catch((err) => {
           console.log(err);
         });
-      alert("Account Successfully Created");
     } catch (error) {
       setValidationMessage(error.message);
     }
@@ -162,6 +166,18 @@ const CompleteProfile = () => {
                 setShow(false);
               }}
             />
+            <View className="mt-5 mb-20">
+              <DropDownPicker
+                className="bg-gray-200"
+                placeholder="Gender"
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+              />
+            </View>
           </View>
         </View>
 

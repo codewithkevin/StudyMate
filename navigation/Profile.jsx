@@ -3,9 +3,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Screens Import
-import CompleteProfile from "./../Screens/Profile/CompleteProfile";
-import SignInScreen from "./../Screens/AuthScreens/SignInScreen";
-import SignUpScreen from "./../Screens/AuthScreens/SignUpScreen";
+import CompleteProfile from './../Screens/Profile/CompleteProfile';
+import SignInScreen from './../Screens/AuthScreens/SignInScreen';
+import SignUpScreen from './../Screens/AuthScreens/SignUpScreen';
 
 const ProfileStack = createNativeStackNavigator();
 
