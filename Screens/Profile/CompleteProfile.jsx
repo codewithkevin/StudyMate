@@ -154,33 +154,6 @@ const CompleteProfile = () => {
         <View className="mb-5">
           <View className="relative">
             <TextInput
-              className="bg-gray-200 border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
-              placeholder={clicked ? "Date Of Birth" : date.toDateString()}
-              placeholderTextColor="#000"
-              containerStyle={{ marginTop: 10, backgroundColor: "white" }}
-              required
-            />
-            <TouchableOpacity onPress={showDatePicker}>
-              <Text className="text-white absolute right-2.5 bottom-2.5   focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2">
-                <AntDesign name="camerao" size={24} color="black" />
-              </Text>
-            </TouchableOpacity>
-            {datePicker && (
-              <DateTimePicker
-                value={date}
-                mode={"date"}
-                display={Platform.OS === "ios" ? "spinner" : "default"}
-                is24Hour={true}
-                onChange={onDateSelected}
-                style={styleSheet.datePicker}
-              />
-            )}
-          </View>
-        </View>
-
-        <View className="mb-5">
-          <View className="relative">
-            <TextInput
               className="bg-gray-200 text-center border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
               placeholder={show ? countryCode : "Phone Number"}
               placeholderTextColor="#000"
