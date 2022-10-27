@@ -113,7 +113,7 @@ const SignUpScreen = ({ navigation }) => {
             className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
           >
             <Text className="text-white font-bold text-[15px]">
-              Get Started
+              Continue
             </Text>
           </TouchableOpacity>
           <View className="mt-2">

@@ -28,13 +28,13 @@ const CompleteProfile = () => {
   const [username, setUsername] = useState("");
   const [image, setImage] = useState(null);
   const [show, setShow] = useState(false);
-  const [countryCode, setCountryCode] = useState("");
+  const [countryCode, setCountryCode] = useState("+233");
   const [number, setNumber] = useState("");
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
   const [clicked, setClicked] = useState(true);
 
-  const PhoneNumbaer = `${countryCode} +  ${setCountryCode}`;
+  const PhoneNumber = countryCode.concat(setNumber);
 
   //ROutes
   const route = useRoute();
@@ -57,8 +57,7 @@ const CompleteProfile = () => {
         email,
         password,
         name,
-        date,
-        completed,
+        PhoneNumber,
         username,
       })
         .then((response) => {
@@ -89,18 +88,6 @@ const CompleteProfile = () => {
       setImage(result.uri);
     }
   };
-
-  //Fuction To show date
-  function showDatePicker() {
-    setDatePicker(true);
-  }
-
-  //Function to display date
-  function onDateSelected(event, value) {
-    setDate(value);
-    setClicked(false);
-    setDatePicker(false);
-  }
 
   return (
     <View className="p-5 mt-10">
@@ -155,7 +142,7 @@ const CompleteProfile = () => {
           <View className="relative">
             <TextInput
               className="bg-gray-200 text-center border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
-              placeholder={show ? countryCode : "Phone Number"}
+              placeholder={"Phone Number"}
               placeholderTextColor="#000"
               value={number}
               onChangeText={(text) => setNumber(text)}
@@ -178,14 +165,12 @@ const CompleteProfile = () => {
           </View>
         </View>
 
-        <View className="flex flex-row justify-center mt-10 bg-blue">
-          <TouchableOpacity
-            onPress={createAccount}
-            className="bg-blue-400 p-3 rounded-full items-center"
-          >
-            <AntDesign name="camerao" size={44} color="white" />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={createAccount}
+          className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
+        >
+          <Text className="text-white font-bold text-[15px]">Get Started</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
