@@ -101,19 +101,6 @@ const SignUpScreen = ({ navigation }) => {
               secureTextEntry={true}
             />
           </View>
-          {/* <View className="mb-3">
-            <TextInput
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-[20px] focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="confirm password"
-              containerStyle={{ marginTop: 10 }}
-              value={confirmPassword}
-              onChangeText={(value) =>
-                validateAndSet(value, setConfirmPassword)
-              }
-              secureTextEntry
-              onBlur={() => checkPassword(password, confirmPassword)}
-            />
-          </View> */}
           <TouchableOpacity
             onPress={createAccount}
             className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"

@@ -13,35 +13,31 @@ import { useNavigation } from "@react-navigation/native";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { Foundation } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+
+import { Entypo } from "@expo/vector-icons";
 import { db } from "../firebase";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import * as ImagePicker from "expo-image-picker";
-import { CountryPicker } from "react-native-country-codes-picker";
 
 const CompleteProfile = () => {
   const [validationMessage, setValidationMessage] = useState("");
   const [gender, setGender] = useState("");
   const [username, setUsername] = useState("");
-  const [image, setImage] = useState(null);
-  const [show, setShow] = useState(false);
-  const [countryCode, setCountryCode] = useState("");
   const [number, setNumber] = useState("");
+  const [selected, setSelected] = useState(false);
+  const [value, setValue] = useState("");
+
+  function choosen(e) {
+    e.preventDefault;
+    selected ? setValue("") : setValue("choosen");
+    setSelected((current) => !current);
+    alert(selected);
+  }
 
   const [datePicker, setDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
   const [clicked, setClicked] = useState(true);
-
-  function showDatePicker() {
-    setDatePicker(true);
-  }
-
-  function onDateSelected(event, value) {
-    setDate(value);
-    setClicked(false);
-    setDatePicker(false);
-  }
-
-  const completed = countryCode + number;
 
   //ROutes
   const route = useRoute();
@@ -79,159 +75,124 @@ const CompleteProfile = () => {
     }
   }
 
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  // const pickImage = async () => {
+  //   // No permissions request is necessary for launching the image library
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
 
-    console.log(result);
+  //   console.log(result);
 
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
+  //   if (!result.cancelled) {
+  //     setImage(result.uri);
+  //   }
+  // };
 
   return (
     <View className="p-5 mt-10">
-      <View className="flex flex-row space-x-1">
-        <View className="mt-1">
-          <TouchableOpacity>
-            <AntDesign name="arrowleft" size={28} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Text className="mb-5 text- text-2xl">Fill your Profile</Text>
-        </View>
-      </View>
-      <View className="flex justify-center items-center static">
-        {image ? (
-          <Image
-            source={{
-              uri: image,
-            }}
-            className="rounded-full w-[200] h-[200] border-gray-900"
-          />
-        ) : (
-          <Image
-            source={{
-              uri: `https://images.unsplash.com/photo-1662581871625-7dbd3ac1ca18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80`,
-            }}
-            className="rounded-full w-[200] h-[200]"
-          />
-        )}
-        <View className="absolute bottom-0 right-24 ...">
-          <TouchableOpacity
-            onPress={pickImage}
-            className="bg-gray-200 p-3 rounded-full"
-          >
-            <AntDesign name="camerao" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View>
-        <View className="mb-5 mt-4">
-          <TextInput
-            className="bg-gray-200 border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
-            placeholder="UserName"
-            placeholderTextColor="#000"
-            containerStyle={{ marginTop: 10, backgroundColor: "white" }}
-            value={username}
-            onChangeText={(text) => setUsername(text)}
-          />
-        </View>
-
-        <View className="mb-5">
-          <View className="relative">
-            <TextInput
-              className="bg-gray-200 border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
-              placeholder={clicked ? "Date Of Birth" : date.toDateString()}
-              placeholderTextColor="#000"
-              containerStyle={{ marginTop: 10, backgroundColor: "white" }}
-              required
-            />
-            <TouchableOpacity onPress={showDatePicker}>
-              <Text className="text-white absolute right-2.5 bottom-2.5   focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2">
-                <AntDesign name="camerao" size={24} color="black" />
-              </Text>
+      <View className="mb-5">
+        <Text className="text-2xl">You are looking for a/an?</Text>
+        <View className="flex flex-row justify-evenly mb-5">
+          <View className="mt-5">
+            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
+              <Ionicons name="people-outline" size={24} color="black" />
             </TouchableOpacity>
-            {datePicker && (
-              <DateTimePicker
-                value={date}
-                mode={"date"}
-                display={Platform.OS === "ios" ? "spinner" : "default"}
-                is24Hour={true}
-                onChange={onDateSelected}
-                style={styleSheet.datePicker}
-              />
-            )}
+            <View className="mt-2">
+              <Text className="text-center text-lg">Friends</Text>
+            </View>
+          </View>
+          <View className="mt-5">
+            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
+              <AntDesign name="book" size={24} color="black" />
+            </TouchableOpacity>
+            <View className="mt-2">
+              <Text className="text-center text-lg">Study Mate</Text>
+            </View>
           </View>
         </View>
+      </View>
 
-        <View className="mb-5">
-          <View className="relative">
-            <TextInput
-              className="bg-gray-200 text-center border border-gray-400 text-black text-sm rounded-[10px] block w-full p-4 placeholder-black"
-              placeholder={show ? countryCode : "Phone Number"}
-              placeholderTextColor="#000"
-              value={number}
-              onChangeText={(text) => setNumber(text)}
-              containerStyle={{ marginTop: 10, backgroundColor: "white" }}
-              required
-            />
-            <TouchableOpacity onPress={() => setShow(true)}>
-              <Text className="text-black absolute mt-1 left-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2">
-                {countryCode}
-              </Text>
+      <View className="mb-5">
+        <Text className="text-2xl">Your Gender</Text>
+        <View className="flex flex-row justify-evenly mb-5">
+          <View className="mt-5">
+            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
+              <Foundation name="male" size={24} color="black" />
             </TouchableOpacity>
-            <CountryPicker
-              show={show}
-              // when picker button press you will get the country object with dial code
-              pickerButtonOnPress={(item) => {
-                setCountryCode(item.dial_code);
-                setShow(false);
-              }}
-            />
+            <View className="mt-2">
+              <Text className="text-center text-lg">Male</Text>
+            </View>
+          </View>
+          <View className="mt-5">
+            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
+              <FontAwesome5 name="female" size={24} color="black" />
+            </TouchableOpacity>
+            <View className="mt-2">
+              <Text className="text-center text-lg">Female</Text>
+            </View>
+          </View>
+          <View className="mt-5">
+            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
+              <Entypo name="awareness-ribbon" size={24} color="black" />
+            </TouchableOpacity>
+            <View className="mt-2">
+              <Text className="text-center text-lg">Unisex</Text>
+            </View>
           </View>
         </View>
+      </View>
 
-        <View className="flex flex-row justify-center mt-10 bg-blue">
-          <TouchableOpacity
-            onPress={createAccount}
-            className="bg-blue-400 p-3 rounded-full items-center"
-          >
-            <AntDesign name="camerao" size={44} color="white" />
-          </TouchableOpacity>
+      <View className="mb-5">
+        <Text className="text-2xl">Your Occupation</Text>
+        <View className="flex flex-row justify-evenly mb-5">
+          <View className="mt-5">
+            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
+              <Ionicons name="ios-person-outline" size={24} color="black" />
+            </TouchableOpacity>
+            <View className="mt-2">
+              <Text className="text-center text-lg">Student</Text>
+            </View>
+          </View>
+          <View className="mt-5">
+            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
+              <Ionicons name="ios-git-network" size={24} color="black" />
+            </TouchableOpacity>
+            <View className="mt-2">
+              <Text className="text-center text-lg">Worker</Text>
+            </View>
+          </View>
         </View>
       </View>
+
+      
     </View>
   );
 };
 
 export default CompleteProfile;
 
-const styleSheet = StyleSheet.create({
-  text: {
-    fontSize: 25,
-    color: "red",
-    padding: 3,
-    marginBottom: 10,
-    textAlign: "center",
-  },
+// const styleSheet = StyleSheet.create({
+//   text: {
+//     fontSize: 25,
+//     color: "red",
+//     padding: 3,
+//     marginBottom: 10,
+//     textAlign: "center",
+//   },
 
-  // Style for iOS ONLY...
-  datePicker: {
-    justifyContent: "right",
-    alignItems: "flex-start",
-    borderRadius: "52px",
-    marginTop: 10,
-    width: 320,
-    height: 260,
-    display: "flex",
-    backgroundColor: "gray",
-    color: "gray",
-  },
-});
+//   // Style for iOS ONLY...
+//   datePicker: {
+//     justifyContent: "right",
+//     alignItems: "flex-start",
+//     borderRadius: "52px",
+//     marginTop: 10,
+//     width: 320,
+//     height: 260,
+//     display: "flex",
+//     backgroundColor: "gray",
+//     color: "gray",
+//   },
+// });
