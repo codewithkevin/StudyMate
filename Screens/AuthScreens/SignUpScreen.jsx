@@ -37,23 +37,16 @@ const SignUpScreen = ({ navigation }) => {
     setValue(value);
   };
 
-  async function checkerror() {
-    email === "" || password === ""
-      ? setValidationMessage("required filled missing")
-      : "";
-    // try {
-    //   navigation.navigate("profile", {
-    //     email: email,
-    //     auth: auth,
-    //     password: password,
-    //     name: name,
-    //   });
-    // } catch (error) {
-    //   setValidationMessage(error.message);
-    // }
-    if (email === "" || password === "" || name == "") {
-      // setValidationMessage("required filled missing");
-      // alert(validationMessage);
+  function checkerror() {
+    const regex = /\@./;
+    if (regex.test(email) === false) {
+      setValidationMessage("Email not valid");
+      setModalVisible(true);
+    } else if (password.length < 6) {
+      setValidationMessage("Password too short");
+      setModalVisible(true);
+    } else if (email === "" || password === "" || name == "") {
+      setValidationMessage("required filled missing");
       setModalVisible(true);
     } else {
       navigation.navigate("profile", {
