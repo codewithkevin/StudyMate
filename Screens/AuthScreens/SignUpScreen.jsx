@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   TextInput,
+  Pressable,
+  Modal,
 } from "react-native";
 import React, { useState } from "react";
 import "react-native-get-random-values";
@@ -29,6 +31,7 @@ const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   let validateAndSet = (value, setValue) => {
     setValue(value);
@@ -38,15 +41,27 @@ const SignUpScreen = ({ navigation }) => {
     email === "" || password === ""
       ? setValidationMessage("required filled missing")
       : "";
-    try {
+    // try {
+    //   navigation.navigate("profile", {
+    //     email: email,
+    //     auth: auth,
+    //     password: password,
+    //     name: name,
+    //   });
+    // } catch (error) {
+    //   setValidationMessage(error.message);
+    // }
+    if (email === "" || password === "" || name == "") {
+      // setValidationMessage("required filled missing");
+      // alert(validationMessage);
+      setModalVisible(true);
+    } else {
       navigation.navigate("profile", {
         email: email,
         auth: auth,
         password: password,
         name: name,
       });
-    } catch (error) {
-      setValidationMessage(error.message);
     }
   }
 
@@ -108,12 +123,6 @@ const SignUpScreen = ({ navigation }) => {
               Get Started
             </Text>
           </TouchableOpacity>
-          {
-            <Text className="text-center" style={styles.error}>
-              {validationMessage}
-            </Text>
-          }
-
           <View className="mt-2">
             <Text className="text-lg text-center">Or</Text>
             <View className="flex justify-evenly flex-row mt-2">
@@ -139,6 +148,31 @@ const SignUpScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
+            {}
+            <View style={styles.centeredView}>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                    <Text style={styles.modalText}> {validationMessage}</Text>
+                    <Pressable
+                      style={[styles.button, styles.buttonClose]}
+                      onPress={() => setModalVisible(!modalVisible)}
+                    >
+                      <Text style={styles.textStyle}>Close</Text>
+                    </Pressable>
+                  </View>
+                </View>
+              </Modal>
+            </View>
+
             <View className="mt-10 items-center flex justify-center">
               <View className="flex flex-row space-x-2">
                 <Text className="flex">Already Have An Account?</Text>
@@ -160,8 +194,47 @@ const SignUpScreen = ({ navigation }) => {
 export default SignUpScreen;
 
 const styles = StyleSheet.create({
-  error: {
-    marginTop: 10,
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
     color: "red",
+    fontWeight: "bold",
   },
 });
