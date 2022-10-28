@@ -149,13 +149,13 @@ const SignUpScreen = ({ navigation }) => {
               animationType="slide"
               transparent={true}
               visible={modalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-                setModalVisible(!modalVisible);
-              }}
             >
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
+                  <Image
+                    className="mb-[10]  w-20 h-[125px]"
+                    source={require("./Assest/error.png")}
+                  />
                   <Text style={styles.modalText}>{validationMessage}</Text>
                   <Pressable
                     style={[styles.button, styles.buttonClose]}
@@ -180,15 +180,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
+    width: "90%",
     shadowOffset: {
       width: 0,
       height: 2,
