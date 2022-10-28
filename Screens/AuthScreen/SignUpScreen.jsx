@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   TextInput,
+  Pressable,
+  Modal,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import "react-native-get-random-values";
@@ -15,7 +17,7 @@ import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { db } from "../firebase";
+import { db } from "./../../firebase";
 
 const auth = getAuth();
 
@@ -25,42 +27,38 @@ const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
-  let validateAndSet = (value, setValue) => {
-    setValue(value);
-  };
-
-  async function createAccount() {
-    email === "" || password === ""
-      ? setValidationMessage("required filled missing")
-      : "";
-    try {
-      // // await createUserWithEmailAndPassword(auth, email, password);
-      // const userRef = collection(db, "Test");
-      // addDoc(userRef, { name, email, password, id })
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+  function checkerror() {
+    const regex = /\@./;
+    if (email === "" || password === "" || name == "") {
+      setValidationMessage("required filled missing");
+      setModalVisible(true);
+    } else if (regex.test(email) === false) {
+      setValidationMessage("Email not valid");
+      setModalVisible(true);
+    } else if (password.length < 6) {
+      setValidationMessage("Password too short");
+      setModalVisible(true);
+    } else {
       navigation.navigate("profile", {
         email: email,
         auth: auth,
         password: password,
         name: name,
       });
-    } catch (error) {
-      setValidationMessage(error.message);
     }
   }
 
   return (
-    <KeyboardAvoidingView className="flex-1 h-full w-full" style={styles.container}>
+    <KeyboardAvoidingView
+      className="flex-1 h-full w-full"
+      style={styles.container}
+    >
       <View className="mt-[10px] ml-12 mb-5">
         <Image
           className="mb-[10] mt-10 w-24 h-[125px]"
-          source={require("../Assest/sammy-no-connection.png")}
+          source={require("./Assest/sammy-no-connection.png")}
         />
         <Text className="font-medium text-2xl">Hello There</Text>
         <Text className="text-gray-400 w-64">
@@ -102,18 +100,13 @@ const SignUpScreen = ({ navigation }) => {
             />
           </View>
           <TouchableOpacity
-            onPress={createAccount}
+            onPress={checkerror}
             className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
           >
             <Text className="text-white font-bold text-[15px]">
               Get Started
             </Text>
           </TouchableOpacity>
-          {
-            <Text className="text-center" style={styles.error}>
-              {validationMessage}
-            </Text>
-          }
 
           <View className="mt-2">
             <Text className="text-lg text-center">Or</Text>
@@ -152,6 +145,30 @@ const SignUpScreen = ({ navigation }) => {
               </View>
             </View>
           </View>
+
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>{validationMessage}</Text>
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>Close</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
+          </View>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -161,8 +178,47 @@ const SignUpScreen = ({ navigation }) => {
 export default SignUpScreen;
 
 const styles = StyleSheet.create({
-  error: {
-    marginTop: 10,
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
     color: "red",
+    fontWeight: "bold",
   },
 });

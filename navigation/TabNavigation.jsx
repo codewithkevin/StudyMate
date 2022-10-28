@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+//Icons Support
 import { Octicons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+//Screens Import
 import HomeScreen from "../Screens/HomeScreen";
 import CategoryScreen from "./../Screens/CategoryScreen";
 import NotificationScreen from "./../Screens/NotificationScreen";
-import ProfileScreen from './../Screens/ProfileScreen';
+import ProfileScreen from "./../Screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   const [show, setShow] = useState(true);
-
-  const handle = () => {
-    setShow((current) => !current);
-  };
 
   return (
     <Tab.Navigator

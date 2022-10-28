@@ -15,7 +15,7 @@ import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { db } from "../firebase";
+import { db } from './../../firebase';
 
 const auth = getAuth();
 
@@ -44,7 +44,7 @@ const SignInScreen = ({ navigation }) => {
       <View className="mt-[10px] ml-12">
         <Image
           className="mb-[5] mt-10 w-24 h-[125px]"
-          source={require("../Assest/sammy-no-connection.png")}
+          source={require("./Assest/sammy-no-connection.png")}
         />
         <Text className="font-medium text-2xl">Welcome</Text>
         <Text className="text-gray-400 w-64">Input your details here</Text>
