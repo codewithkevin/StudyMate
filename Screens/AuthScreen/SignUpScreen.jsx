@@ -18,6 +18,7 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "./../../firebase";
+import ModalPopup from "./../../Components/ModalPopup";
 
 const auth = getAuth();
 
@@ -51,10 +52,7 @@ const SignUpScreen = ({ navigation }) => {
   }
 
   return (
-    <KeyboardAvoidingView
-      className="flex-1 h-full w-full"
-      style={styles.container}
-    >
+    <KeyboardAvoidingView className="flex-1 h-full w-full">
       <View className="mt-[10px] ml-12 mb-5">
         <Image
           className="mb-[10] mt-10 w-24 h-[125px]"
@@ -103,9 +101,7 @@ const SignUpScreen = ({ navigation }) => {
             onPress={checkerror}
             className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
           >
-            <Text className="text-white font-bold text-[15px]">
-              Get Started
-            </Text>
+            <Text className="text-white font-bold text-[15px]">Continue</Text>
           </TouchableOpacity>
 
           <View className="mt-2">
@@ -144,30 +140,12 @@ const SignUpScreen = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
             </View>
-          </View>
 
-          <View style={styles.centeredView}>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <Text style={styles.modalText}>{validationMessage}</Text>
-                  <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={styles.textStyle}>Close</Text>
-                  </Pressable>
-                </View>
-              </View>
-            </Modal>
+            <ModalPopup
+              setModalVisible={setModalVisible}
+              modalVisible={modalVisible}
+              validationMessage={validationMessage}
+            />
           </View>
         </View>
       </View>
@@ -176,49 +154,3 @@ const SignUpScreen = ({ navigation }) => {
 };
 
 export default SignUpScreen;
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-    color: "red",
-    fontWeight: "bold",
-  },
-});
