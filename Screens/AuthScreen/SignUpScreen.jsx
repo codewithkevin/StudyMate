@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   TextInput,
+  Pressable,
+  Modal,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import "react-native-get-random-values";
@@ -25,25 +27,26 @@ const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
-  let validateAndSet = (value, setValue) => {
-    setValue(value);
-  };
-
-  async function createAccount() {
-    email === "" || password === ""
-      ? setValidationMessage("required filled missing")
-      : "";
-    try {
+  function checkerror() {
+    const regex = /\@./;
+    if (email === "" || password === "" || name == "") {
+      setValidationMessage("required filled missing");
+      setModalVisible(true);
+    } else if (regex.test(email) === false) {
+      setValidationMessage("Email not valid");
+      setModalVisible(true);
+    } else if (password.length < 6) {
+      setValidationMessage("Password too short");
+      setModalVisible(true);
+    } else {
       navigation.navigate("profile", {
         email: email,
         auth: auth,
         password: password,
         name: name,
-        id: id,
       });
-    } catch (error) {
-      setValidationMessage(error.message);
     }
   }
 
@@ -97,7 +100,7 @@ const SignUpScreen = ({ navigation }) => {
             />
           </View>
           <TouchableOpacity
-            onPress={createAccount}
+            onPress={checkerror}
             className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
           >
             <Text className="text-white font-bold text-[15px]">
@@ -142,6 +145,30 @@ const SignUpScreen = ({ navigation }) => {
               </View>
             </View>
           </View>
+
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>{validationMessage}</Text>
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>Close</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
+          </View>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -151,8 +178,47 @@ const SignUpScreen = ({ navigation }) => {
 export default SignUpScreen;
 
 const styles = StyleSheet.create({
-  error: {
-    marginTop: 10,
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
     color: "red",
+    fontWeight: "bold",
   },
 });
