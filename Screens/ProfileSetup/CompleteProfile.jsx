@@ -18,7 +18,7 @@ import { Foundation } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Entypo } from "@expo/vector-icons";
-import { db } from "../firebase";
+import { db } from './../../firebase';
 
 const CompleteProfile = () => {
   const [validationMessage, setValidationMessage] = useState("");
@@ -165,9 +165,14 @@ const CompleteProfile = () => {
             </View>
           </View>
         </View>
-      </View>
 
-      
+        <TouchableOpacity
+          onPress={createAccount}
+          className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
+        >
+          <Text className="text-white font-bold text-[15px]">Get Started</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

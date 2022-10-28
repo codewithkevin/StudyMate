@@ -2,11 +2,9 @@ import { SafeAreaView, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import SignInScreen from "./../Screens/SignInScreen";
-import SignUpScreen from "./../Screens/SignUpScreen";
-import TabNavigation from "./TabNavigation";
-import OnboardingScreens from "./../Screens/OnboardingScreens";
-import CompleteProfile from "./../Screens/CompleteProfile";
+//Screens Import 
+import CompleteProfile from './../Screens/ProfileSetup/CompleteProfile';
+import SignUpScreen from './../Screens/AuthScreen/SignUpScreen';
 
 const ProfileStack = createNativeStackNavigator();
 

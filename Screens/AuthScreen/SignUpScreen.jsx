@@ -15,7 +15,7 @@ import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { db } from "../firebase";
+import { db } from "./../../firebase";
 
 const auth = getAuth();
 
@@ -35,20 +35,12 @@ const SignUpScreen = ({ navigation }) => {
       ? setValidationMessage("required filled missing")
       : "";
     try {
-      // // await createUserWithEmailAndPassword(auth, email, password);
-      // const userRef = collection(db, "Test");
-      // addDoc(userRef, { name, email, password, id })
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
       navigation.navigate("profile", {
         email: email,
         auth: auth,
         password: password,
         name: name,
+        id: id,
       });
     } catch (error) {
       setValidationMessage(error.message);
@@ -56,11 +48,14 @@ const SignUpScreen = ({ navigation }) => {
   }
 
   return (
-    <KeyboardAvoidingView className="flex-1 h-full w-full" style={styles.container}>
+    <KeyboardAvoidingView
+      className="flex-1 h-full w-full"
+      style={styles.container}
+    >
       <View className="mt-[10px] ml-12 mb-5">
         <Image
           className="mb-[10] mt-10 w-24 h-[125px]"
-          source={require("../Assest/sammy-no-connection.png")}
+          source={require("./Assest/sammy-no-connection.png")}
         />
         <Text className="font-medium text-2xl">Hello There</Text>
         <Text className="text-gray-400 w-64">
@@ -109,11 +104,6 @@ const SignUpScreen = ({ navigation }) => {
               Get Started
             </Text>
           </TouchableOpacity>
-          {
-            <Text className="text-center" style={styles.error}>
-              {validationMessage}
-            </Text>
-          }
 
           <View className="mt-2">
             <Text className="text-lg text-center">Or</Text>

@@ -52,7 +52,7 @@ const OnboardingScreens = ({ navigation }) => {
           backgroundColor: "#a6e4d0",
           image: (
             <Image
-              source={require("../Assest/casual-life-3d-planet-earth-2.png")}
+              source={require("./Assest/casual-life-3d-planet-earth-2.png")}
             />
           ),
           title: "Connect to the World",
@@ -62,7 +62,7 @@ const OnboardingScreens = ({ navigation }) => {
           backgroundColor: "#fdeb93",
           image: (
             <Image
-              source={require("../Assest/business-3d-young-people-standing-and-talking.png")}
+              source={require("./Assest/business-3d-young-people-standing-and-talking.png")}
             />
           ),
           title: "Share Your Ideas",
@@ -72,7 +72,7 @@ const OnboardingScreens = ({ navigation }) => {
           backgroundColor: "#e9bcbe",
           image: (
             <Image
-              source={require("../Assest/3d-business-man-and-woman-working-at-the-table.png")}
+              source={require("./Assest/3d-business-man-and-woman-working-at-the-table.png")}
             />
           ),
           title: "Find A Study Buddy",
