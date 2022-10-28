@@ -14,21 +14,28 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "./../../firebase";
 import ModalPopup from "./../../Components/ModalPopup";
+import { ErrorContext } from "./../../Context/AuthContext/CheckError";
 
 const auth = getAuth();
 
 const SignUpScreen = ({ navigation }) => {
-  let id = uuidv4();
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [validationMessage, setValidationMessage] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
+  const {
+    email,
+    setEmail,
+    name,
+    setName,
+    password,
+    setPassword,
+    validationMessage,
+    setValidationMessage,
+    modalVisible,
+    setModalVisible,
+  } = useContext(ErrorContext);
 
   function checkerror() {
     const regex = /\@./;

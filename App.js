@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import TabNavigation from "./navigation/TabNavigation";
 import { View } from "react-native";
 import { Text } from "react-native";
+import CheckErrorProvider from "./Context/AuthContext/CheckError"
 import MyStack from "./navigation/MyStack";
 import RootNavigation from "./navigation/index";
 import LoadingScreen from "./Screens/LoadingScreen";
@@ -18,14 +19,16 @@ export default function App() {
   }, []);
 
   return (
-    <View className="flex-1">
-      {loading === false ? (
-        <View className="flex-1">
-          <RootNavigation />
-        </View>
-      ) : (
-        <LoadingScreen />
-      )}
-    </View>
+    <CheckErrorProvider>
+      <View className="flex-1">
+        {loading === false ? (
+          <View className="flex-1">
+            <RootNavigation />
+          </View>
+        ) : (
+          <LoadingScreen />
+        )}
+      </View>
+    </CheckErrorProvider>
   );
 }
