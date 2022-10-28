@@ -103,9 +103,7 @@ const SignUpScreen = ({ navigation }) => {
             onPress={checkerror}
             className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
           >
-            <Text className="text-white font-bold text-[15px]">
-              Get Started
-            </Text>
+            <Text className="text-white font-bold text-[15px]">Continue</Text>
           </TouchableOpacity>
 
           <View className="mt-2">
