@@ -11,16 +11,18 @@ import {
 } from "react-native";
 import React from "react";
 
-const ModalPopup = ({ modalVisible, setModalVisible, validationMessage }) => {
+const ModalPopup = ({
+  modalVisible,
+  setModalVisible,
+  validationMessage,
+  image,
+}) => {
   return (
     <View style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Image
-              className="mb-[10]  w-20 h-[125px]"
-              source={require("./Assest/error.png")}
-            />
+            <Image className="mb-[10]  w-20 h-[125px]" source={image} />
             <Text style={styles.modalText}>{validationMessage}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}

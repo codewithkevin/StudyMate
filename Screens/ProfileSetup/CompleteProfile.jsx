@@ -10,11 +10,15 @@ import {
 import React, { useState, useContext } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
+//Components and SCreens Support
+import ModalPopup from "./../../Components/ModalPopup";
+
 //Context Import
 import { DetailsContext } from "./../../Context/ProfileContext/DetailsContext";
+import { ErrorContext } from "./../../Context/AuthContext/CheckError";
 
 //Firebase Support
-import { collection, addDoc } from "firebase/firestore";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "./../../firebase";
 
@@ -26,8 +30,16 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
 const CompleteProfile = () => {
+  const {
+    validationMessage,
+    setValidationMessage,
+    modalVisible,
+    setModalVisible,
+  } = useContext(ErrorContext);
+
   //ROutes
   const route = useRoute();
+  const errorImage = "../AuthScreen/Assest/error.png";
 
   const {
     occupantfunction,
@@ -64,28 +76,24 @@ const CompleteProfile = () => {
   const auth = route.params.auth;
   const password = route.params.password;
   const name = route.params.name;
+  const id = route.params.id;
 
-  async function createAccount() {
+  const UserDeatails = {
+    dateExample: Timestamp.fromDate(new Date("December 10, 1815")),
+    accoutInfo: { email, password, name, purpose, gender, occupation, id },
+  };
+
+  async function createAccount(event) {
+    event.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      const userRef = collection(db, "AccountProfile");
-      addDoc(userRef, {
-        email,
-        password,
-        name,
-        purpose,
-        gender,
-        occupation,
-      })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      alert("Account Successfully Created");
+      await setDoc(doc(db, "UserDeatils", id), UserDeatails);
+      alert("Welcome");
     } catch (error) {
-      setValidationMessage(error.message);
+      if (error) {
+        setValidationMessage("Account already exists");
+        setModalVisible(true);
+      }
     }
   }
 
@@ -233,34 +241,17 @@ const CompleteProfile = () => {
           onPress={createAccount}
           className="items-center mt-2 bg-[#075ADE] p-5 rounded-full rounded-full]"
         >
-          <Text className="text-white font-bold text-[15px]">Get Started</Text>
+          <AntDesign name="arrowright" size={34} color="white" />
         </TouchableOpacity>
       </View>
+      <ModalPopup
+        setModalVisible={setModalVisible}
+        modalVisible={modalVisible}
+        validationMessage={validationMessage}
+        image={require(errorImage)}
+      />
     </View>
   );
 };
 
 export default CompleteProfile;
-
-// const styleSheet = StyleSheet.create({
-//   text: {
-//     fontSize: 25,
-//     color: "red",
-//     padding: 3,
-//     marginBottom: 10,
-//     textAlign: "center",
-//   },
-
-//   // Style for iOS ONLY...
-//   datePicker: {
-//     justifyContent: "right",
-//     alignItems: "flex-start",
-//     borderRadius: "52px",
-//     marginTop: 10,
-//     width: 320,
-//     height: 260,
-//     display: "flex",
-//     backgroundColor: "gray",
-//     color: "gray",
-//   },
-// });

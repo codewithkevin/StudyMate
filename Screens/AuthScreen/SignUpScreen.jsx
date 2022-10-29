@@ -24,6 +24,9 @@ import { ErrorContext } from "./../../Context/AuthContext/CheckError";
 const auth = getAuth();
 
 const SignUpScreen = ({ navigation }) => {
+  const errorImage = "../AuthScreen/Assest/error.png";
+  const id = uuidv4();
+
   const {
     email,
     setEmail,
@@ -37,7 +40,8 @@ const SignUpScreen = ({ navigation }) => {
     setModalVisible,
   } = useContext(ErrorContext);
 
-  function checkerror() {
+  function checkerror(e) {
+    e.preventdefault;
     const regex = /\@./;
     if (email === "" || password === "" || name == "") {
       setValidationMessage("required filled missing");
@@ -54,7 +58,11 @@ const SignUpScreen = ({ navigation }) => {
         auth: auth,
         password: password,
         name: name,
+        id: id,
       });
+      setEmail("")
+      setPassword("")
+      setName("")
     }
   }
 
@@ -152,6 +160,7 @@ const SignUpScreen = ({ navigation }) => {
               setModalVisible={setModalVisible}
               modalVisible={modalVisible}
               validationMessage={validationMessage}
+              image={require(errorImage)}
             />
           </View>
         </View>

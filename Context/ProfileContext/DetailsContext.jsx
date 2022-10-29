@@ -73,7 +73,7 @@ const DetailsProvider = (props) => {
       return null;
     } else {
       setSelectedPurpose((current) => !current);
-      selectedPurpose ? setPurpose("friends") : setPurpose("");
+      selectedPurpose ? setPurpose("friendship") : setPurpose("");
     }
   }
 
