@@ -7,10 +7,12 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { db } from "./../../firebase";
+import ModalPopup from "./../../Components/ModalPopup";
+import { ErrorContext } from "./../../Context/AuthContext/CheckError";
 
 //Icons Support
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -20,14 +22,22 @@ import { Fontisto } from "@expo/vector-icons";
 const auth = getAuth();
 
 const SignInScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const errorImage = "../AuthScreen/Assest/error.png";
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    modalVisible,
+    setModalVisible,
+  } = useContext(ErrorContext);
+
   const [validationMessage, setvalidationMessage] = useState("");
 
   async function login() {
     if (email === "" || password === "") {
       setvalidationMessage("required filled missing");
+      setModalVisible(true);
       return;
     }
     try {
@@ -35,6 +45,7 @@ const SignInScreen = ({ navigation }) => {
       navigation.navigate("HomeScreen");
     } catch (error) {
       setvalidationMessage(error.message);
+      setModalVisible(true);
     }
   }
 
@@ -87,11 +98,6 @@ const SignInScreen = ({ navigation }) => {
           >
             <Text className="text-white font-bold text-[15px]">Login</Text>
           </TouchableOpacity>
-          {
-            <Text className="text-center" style={styles.error}>
-              {validationMessage}
-            </Text>
-          }
 
           <View className="mt-2">
             <Text className="text-lg text-center">Or</Text>
@@ -127,6 +133,13 @@ const SignInScreen = ({ navigation }) => {
               </View>
             </View>
           </View>
+
+          <ModalPopup
+            setModalVisible={setModalVisible}
+            modalVisible={modalVisible}
+            validationMessage={validationMessage}
+            image={require(errorImage)}
+          />
         </View>
       </View>
     </View>
