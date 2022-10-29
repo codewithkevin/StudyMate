@@ -60,9 +60,9 @@ const SignUpScreen = ({ navigation }) => {
         name: name,
         id: id,
       });
-      setEmail("")
-      setPassword("")
-      setName("")
+      setEmail("");
+      setPassword("");
+      setName("");
     }
   }
 
