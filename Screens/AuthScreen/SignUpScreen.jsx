@@ -14,23 +14,34 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "./../../firebase";
 import ModalPopup from "./../../Components/ModalPopup";
+import { ErrorContext } from "./../../Context/AuthContext/CheckError";
 
 const auth = getAuth();
 
 const SignUpScreen = ({ navigation }) => {
-  let id = uuidv4();
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [validationMessage, setValidationMessage] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
+  const errorImage = "../AuthScreen/Assest/error.png";
+  const id = uuidv4();
 
-  function checkerror() {
+  const {
+    email,
+    setEmail,
+    name,
+    setName,
+    password,
+    setPassword,
+    validationMessage,
+    setValidationMessage,
+    modalVisible,
+    setModalVisible,
+  } = useContext(ErrorContext);
+
+  function checkerror(e) {
+    e.preventdefault;
     const regex = /\@./;
     if (email === "" || password === "" || name == "") {
       setValidationMessage("required filled missing");
@@ -47,7 +58,11 @@ const SignUpScreen = ({ navigation }) => {
         auth: auth,
         password: password,
         name: name,
+        id: id,
       });
+      setEmail("")
+      setPassword("")
+      setName("")
     }
   }
 
@@ -145,6 +160,7 @@ const SignUpScreen = ({ navigation }) => {
               setModalVisible={setModalVisible}
               modalVisible={modalVisible}
               validationMessage={validationMessage}
+              image={require(errorImage)}
             />
           </View>
         </View>

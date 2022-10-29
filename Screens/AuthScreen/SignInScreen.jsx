@@ -7,20 +7,19 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import "react-native-get-random-values";
-import { v4 as uuidv4 } from "uuid";
-import { AntDesign } from "@expo/vector-icons";
-import { Fontisto } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { db } from './../../firebase';
+import { db } from "./../../firebase";
+
+//Icons Support
+import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
 
 const auth = getAuth();
 
 const SignInScreen = ({ navigation }) => {
-  let id = uuidv4();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -72,9 +71,7 @@ const SignInScreen = ({ navigation }) => {
               secureTextEntry
               secureTextEntry={true}
             />
-            <TouchableOpacity
-              className="mt-2 rounded-[15px]"
-            >
+            <TouchableOpacity className="mt-2 rounded-[15px]">
               <Text className="text-black  text-right font-medium text-[15px]">
                 Forgot Password?
               </Text>

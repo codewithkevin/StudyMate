@@ -16,6 +16,7 @@ const MyStack = () => {
           name="TabNavigation"
           component={TabNavigation}
         />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

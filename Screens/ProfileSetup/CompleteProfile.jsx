@@ -7,89 +7,95 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import React, { useState } from "react";
-import { useRoute } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
-import { collection, addDoc } from "firebase/firestore";
+import React, { useState, useContext } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
+//Components and SCreens Support
+import ModalPopup from "./../../Components/ModalPopup";
+
+//Context Import
+import { DetailsContext } from "./../../Context/ProfileContext/DetailsContext";
+import { ErrorContext } from "./../../Context/AuthContext/CheckError";
+
+//Firebase Support
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { AntDesign } from "@expo/vector-icons";
+import { db } from "./../../firebase";
+
+//Icons Support
 import { Ionicons } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-
+import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { db } from './../../firebase';
 
 const CompleteProfile = () => {
-  const [validationMessage, setValidationMessage] = useState("");
-  const [gender, setGender] = useState("");
-  const [username, setUsername] = useState("");
-  const [number, setNumber] = useState("");
-  const [selected, setSelected] = useState(false);
-  const [value, setValue] = useState("");
-
-  function choosen(e) {
-    e.preventDefault;
-    selected ? setValue("") : setValue("choosen");
-    setSelected((current) => !current);
-    alert(selected);
-  }
-
-  const [datePicker, setDatePicker] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [clicked, setClicked] = useState(true);
+  const {
+    validationMessage,
+    setValidationMessage,
+    modalVisible,
+    setModalVisible,
+  } = useContext(ErrorContext);
 
   //ROutes
   const route = useRoute();
+  const errorImage = "../AuthScreen/Assest/error.png";
+
+  const {
+    occupantfunction,
+    studentfuction,
+    occupant,
+    setOccupant,
+    student,
+    setStudent,
+    occupation,
+    setOccupation,
+    unisex,
+    setUnisex,
+    unisexfunction,
+    female,
+    setFemale,
+    femalefunction,
+    malefunction,
+    gender,
+    setGender,
+    male,
+    setMale,
+    purpose,
+    setPurpose,
+    selectedPurpose,
+    setSelectedPurpose,
+    studyselected,
+    setStudySelected,
+    friendshipfunction,
+    studyfunctions,
+  } = useContext(DetailsContext);
 
   //UseRoute is deprecated in favor of useNavigation
   const email = route.params.email;
   const auth = route.params.auth;
   const password = route.params.password;
   const name = route.params.name;
+  const id = route.params.id;
 
-  async function createAccount() {
-    email === "" || password === ""
-      ? setValidationMessage("required filled missing")
-      : "";
+  const UserDeatails = {
+    dateExample: Timestamp.fromDate(new Date("December 10, 1815")),
+    accoutInfo: { email, password, name, purpose, gender, occupation, id },
+  };
+
+  async function createAccount(event) {
+    event.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      const userRef = collection(db, "AccountProfile");
-      addDoc(userRef, {
-        email,
-        password,
-        name,
-        date,
-        completed,
-        username,
-      })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      alert("Account Successfully Created");
+      await setDoc(doc(db, "UserDeatils", id), UserDeatails);
+      alert("Welcome");
     } catch (error) {
-      setValidationMessage(error.message);
+      if (error) {
+        setValidationMessage("Account already exists");
+        setModalVisible(true);
+      }
     }
   }
-
-  // const pickImage = async () => {
-  //   // No permissions request is necessary for launching the image library
-  //   let result = await ImagePicker.launchImageLibraryAsync({
-  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //   });
-
-  //   console.log(result);
-
-  //   if (!result.cancelled) {
-  //     setImage(result.uri);
-  //   }
-  // };
 
   return (
     <View className="p-5 mt-10">
@@ -97,16 +103,34 @@ const CompleteProfile = () => {
         <Text className="text-2xl">You are looking for a/an?</Text>
         <View className="flex flex-row justify-evenly mb-5">
           <View className="mt-5">
-            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
-              <Ionicons name="people-outline" size={24} color="black" />
+            <TouchableOpacity
+              onPress={friendshipfunction}
+              className={`border ${
+                selectedPurpose ? "border-slate-400" : "bg-[#075ADE]"
+              } p-5 w-[84] h-[84] justify-center rounded-full items-center`}
+            >
+              <Ionicons
+                name="people-outline"
+                size={24}
+                color={`${selectedPurpose ? "black" : "white"}`}
+              />
             </TouchableOpacity>
             <View className="mt-2">
               <Text className="text-center text-lg">Friends</Text>
             </View>
           </View>
           <View className="mt-5">
-            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
-              <AntDesign name="book" size={24} color="black" />
+            <TouchableOpacity
+              onPress={studyfunctions}
+              className={`border ${
+                studyselected ? "border-slate-400" : "bg-[#075ADE]"
+              } p-5 w-[84] h-[84] justify-center rounded-full items-center`}
+            >
+              <AntDesign
+                name="book"
+                size={24}
+                color={`${studyselected ? "black" : "white"}`}
+              />
             </TouchableOpacity>
             <View className="mt-2">
               <Text className="text-center text-lg">Study Mate</Text>
@@ -119,24 +143,51 @@ const CompleteProfile = () => {
         <Text className="text-2xl">Your Gender</Text>
         <View className="flex flex-row justify-evenly mb-5">
           <View className="mt-5">
-            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
-              <Foundation name="male" size={24} color="black" />
+            <TouchableOpacity
+              onPress={malefunction}
+              className={`border ${
+                male ? "border-slate-400" : "bg-[#075ADE]"
+              } p-5 w-[84] h-[84] justify-center rounded-full items-center`}
+            >
+              <Foundation
+                name="male"
+                size={24}
+                color={`${male ? "black" : "white"}`}
+              />
             </TouchableOpacity>
             <View className="mt-2">
               <Text className="text-center text-lg">Male</Text>
             </View>
           </View>
           <View className="mt-5">
-            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
-              <FontAwesome5 name="female" size={24} color="black" />
+            <TouchableOpacity
+              onPress={femalefunction}
+              className={`border ${
+                female ? "border-slate-400" : "bg-[#075ADE]"
+              } p-5 w-[84] h-[84] justify-center rounded-full items-center`}
+            >
+              <FontAwesome5
+                name="female"
+                size={24}
+                color={`${female ? "black" : "white"}`}
+              />
             </TouchableOpacity>
             <View className="mt-2">
               <Text className="text-center text-lg">Female</Text>
             </View>
           </View>
           <View className="mt-5">
-            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
-              <Entypo name="awareness-ribbon" size={24} color="black" />
+            <TouchableOpacity
+              onPress={unisexfunction}
+              className={`border ${
+                unisex ? "border-slate-400" : "bg-[#075ADE]"
+              } p-5 w-[84] h-[84] justify-center rounded-full items-center`}
+            >
+              <Entypo
+                name="awareness-ribbon"
+                size={24}
+                color={`${unisex ? "black" : "white"}`}
+              />
             </TouchableOpacity>
             <View className="mt-2">
               <Text className="text-center text-lg">Unisex</Text>
@@ -149,55 +200,58 @@ const CompleteProfile = () => {
         <Text className="text-2xl">Your Occupation</Text>
         <View className="flex flex-row justify-evenly mb-5">
           <View className="mt-5">
-            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
-              <Ionicons name="ios-person-outline" size={24} color="black" />
+            <TouchableOpacity
+              onPress={studentfuction}
+              className={`border ${
+                student ? "border-slate-400" : "bg-[#075ADE]"
+              } p-5 w-[84] h-[84] justify-center rounded-full items-center`}
+            >
+              <Ionicons
+                name="ios-person-outline"
+                size={24}
+                color={`${student ? "black" : "white"}`}
+              />
             </TouchableOpacity>
             <View className="mt-2">
               <Text className="text-center text-lg">Student</Text>
             </View>
           </View>
           <View className="mt-5">
-            <TouchableOpacity className="border border-slate-400 p-5 w-[84] h-[84] justify-center rounded-full items-center">
-              <Ionicons name="ios-git-network" size={24} color="black" />
+            <TouchableOpacity
+              onPress={occupantfunction}
+              className={`border ${
+                occupant ? "border-slate-400" : "bg-[#075ADE]"
+              } p-5 w-[84] h-[84] justify-center rounded-full items-center`}
+            >
+              <Ionicons
+                name="ios-git-network"
+                size={24}
+                color={`${occupant ? "black" : "white"}`}
+              />
             </TouchableOpacity>
             <View className="mt-2">
               <Text className="text-center text-lg">Worker</Text>
             </View>
           </View>
         </View>
+      </View>
 
+      <View className="flex flex-row justify-center">
         <TouchableOpacity
           onPress={createAccount}
-          className="items-center mt-2 bg-[#075ADE] p-5 rounded-[15px]"
+          className="items-center mt-2 bg-[#075ADE] p-5 rounded-full rounded-full]"
         >
-          <Text className="text-white font-bold text-[15px]">Get Started</Text>
+          <AntDesign name="arrowright" size={34} color="white" />
         </TouchableOpacity>
       </View>
+      <ModalPopup
+        setModalVisible={setModalVisible}
+        modalVisible={modalVisible}
+        validationMessage={validationMessage}
+        image={require(errorImage)}
+      />
     </View>
   );
 };
 
 export default CompleteProfile;
-
-// const styleSheet = StyleSheet.create({
-//   text: {
-//     fontSize: 25,
-//     color: "red",
-//     padding: 3,
-//     marginBottom: 10,
-//     textAlign: "center",
-//   },
-
-//   // Style for iOS ONLY...
-//   datePicker: {
-//     justifyContent: "right",
-//     alignItems: "flex-start",
-//     borderRadius: "52px",
-//     marginTop: 10,
-//     width: 320,
-//     height: 260,
-//     display: "flex",
-//     backgroundColor: "gray",
-//     color: "gray",
-//   },
-// });
