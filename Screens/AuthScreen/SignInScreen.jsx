@@ -71,7 +71,10 @@ const SignInScreen = ({ navigation }) => {
               secureTextEntry
               secureTextEntry={true}
             />
-            <TouchableOpacity className="mt-2 rounded-[15px]">
+            <TouchableOpacity
+              onPress={() => navigation.navigate("resetpassword")}
+              className="mt-2 rounded-[15px]"
+            >
               <Text className="text-black  text-right font-medium text-[15px]">
                 Forgot Password?
               </Text>
