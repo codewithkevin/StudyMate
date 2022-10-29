@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Profile from "./Profile";
 import SignInScreen from './../Screens/AuthScreen/SignInScreen';
 import OnboardingScreens from './../Screens/AuthScreen/OnboardingScreens';
+import ResestAccount from './../Screens/AuthScreen/ResestAccount';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,11 @@ export default function AuthStack() {
           options={{ headerShown: false }}
           name="singin"
           component={SignInScreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="resetpassword"
+          component={ResestAccount}
         />
         <Stack.Screen
           options={{ headerShown: false }}
