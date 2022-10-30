@@ -3,6 +3,7 @@ import React from "react";
 import Header from "./../Components/Profile/Header";
 import UserBio from "./../Components/Profile/UserBio";
 import UserInterest from "./../Components/Profile/UserInterest";
+import UserPost from "./../Components/Profile/UserPost";
 
 const ProfileScreen = () => {
   return (
@@ -12,6 +13,7 @@ const ProfileScreen = () => {
         <View className="mt-[130] ml-8 w-full">
           <UserBio />
           <UserInterest />
+          <UserPost />
         </View>
       </ScrollView>
     </View>
