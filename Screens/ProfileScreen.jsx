@@ -7,10 +7,10 @@ import UserPost from "./../Components/Profile/UserPost";
 
 const ProfileScreen = () => {
   return (
-    <View className="h-full w-full mb-20">
+    <View className="h-full w-full">
       <ScrollView>
         <Header />
-        <View className="mt-[130] ml-8 w-full">
+        <View className="mt-[130] ml-8 w-full mb-28">
           <UserBio />
           <UserInterest />
           <UserPost />

@@ -7,7 +7,7 @@ const UserBio = () => {
       <View className="mb-4">
         <Text className="font-medium text-xl">UserName</Text>
       </View>
-      <View className='mb-5'>
+      <View className="mb-5">
         <Text>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae
           non id, voluptatem accusantium ipsa saepe sed nihil explicabo eaque
