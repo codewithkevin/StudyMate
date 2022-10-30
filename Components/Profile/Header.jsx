@@ -17,22 +17,20 @@ const Header = () => {
     uri: "https://images.unsplash.com/photo-1667063462763-f1e064a5b760?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
   };
   return (
-    <ScrollView bounces={false}>
-      <View className="static ...">
-        <ImageBackground source={image} className="h-[270] w-full" />
-        <View className="absolute top-[130] left-0 mt-10 ml-7 ...">
-          <Image
-            source={image1}
-            className="rounded-full w-[170] h-[170] mt-10 border-white border-4"
-          />
-        </View>
-        <View className="absolute top-[300] right-0 mr-5 border p-4 rounded-full">
-          <TouchableOpacity className="items-center">
-            <Text className="font-normal ">edit profile</Text>
-          </TouchableOpacity>
-        </View>
+    <View className="static ...">
+      <ImageBackground source={image} className="h-[270] w-full" />
+      <View className="absolute top-[130] left-0 mt-10 ml-7 ...">
+        <Image
+          source={image1}
+          className="rounded-full w-[170] h-[170] mt-10 border-white border-4"
+        />
       </View>
-    </ScrollView>
+      <View className="absolute top-[300] right-0 mr-5 border p-4 rounded-full">
+        <TouchableOpacity className="items-center">
+          <Text className="font-normal ">edit profile</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
