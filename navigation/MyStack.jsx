@@ -4,6 +4,7 @@ import React from "react";
 
 //Screens Import
 import TabNavigation from "./TabNavigation";
+import SettingsScreen from './../Screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +17,11 @@ const MyStack = () => {
           name="TabNavigation"
           component={TabNavigation}
         />
-        
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="settings"
+          component={SettingsScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
