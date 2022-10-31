@@ -4,7 +4,7 @@ import React from "react";
 
 //Screens Import
 import TabNavigation from "./TabNavigation";
-import UserSetting from './../Components/Settings/UserSetting';
+import SettingsScreen from './../Screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +20,7 @@ const MyStack = () => {
         <Stack.Screen
           options={{ headerShown: false }}
           name="settings"
-          component={UserSetting}
+          component={SettingsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
