@@ -8,6 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons"; 
+
 
 const Header = () => {
   const image = {
@@ -19,6 +22,16 @@ const Header = () => {
   return (
     <View className="static ...">
       <ImageBackground source={image} className="h-[270] w-full" />
+      <View className="absolute mt-14 ml-5 left-[0]">
+        <TouchableOpacity className="bg-neutral-500		 p-2 rounded-full">
+          <AntDesign name="arrowleft" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+      <View className="absolute mt-14 ml-10 right-[20]">
+        <TouchableOpacity className="bg-neutral-500		 p-2 rounded-full">
+          <Ionicons name="settings-outline" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
       <View className="absolute top-[130] left-0 mt-10 ml-7 ...">
         <Image
           source={image1}
