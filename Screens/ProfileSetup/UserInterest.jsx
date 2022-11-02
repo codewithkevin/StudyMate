@@ -80,7 +80,7 @@ const UserInterest = ({ navigation }) => {
     if (interest.length >= 2) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        await setDoc(doc(db, `${email}`, id), UserDeatails);
+        await setDoc(doc(db, "Acoount", email), UserDeatails);
       } catch (error) {
         if (error) {
           setValidationMessage("Account Already Exists");

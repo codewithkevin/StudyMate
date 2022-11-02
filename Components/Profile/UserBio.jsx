@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { useAuthentication } from "./../../Hooks/useAuthentication";
 import { getAuth } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "./../../firebase";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -16,22 +16,22 @@ const UserBio = () => {
   const { user } = useAuthentication();
 
   const user_name = user?.email;
+  console.log(user_name);
 
   useEffect(() => {
     getName();
-  }, []);
+  }, [user_name]);
 
-  const getName = () => {
-    const accountcollection = collection(db, `${user?.email}`);
-    getDocs(accountcollection)
-      .then((response) => {
-        const info = response.docs.map((doc) => ({
-          data: doc.data(),
-          id: doc.id,
-        }));
-        setNames(info);
-      })
-      .catch((error) => console.log(error.message));
+  const getName = async () => {
+    const docRef = doc(db, "Acoount", user_name);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const doc = docSnap.data();
+      setNames(doc);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
   };
 
   console.log(names);
@@ -39,17 +39,7 @@ const UserBio = () => {
   return (
     <View className="w-[90%]">
       <View className="mb-3">
-        <FlatList
-          data={names}
-          renderItem={({ item }) => (
-            <View className="flex">
-              <Text className="text-xl font-medium font-mono">
-                {item.data.name}
-              </Text>
-            </View>
-          )}
-          numColumns={1}
-        />
+        <Text className="text-xl font-medium font-mono">{names.name}</Text>
       </View>
       <View className="mb-3">
         <Text>
