@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 export default function AuthStack() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="setup">
+      <Stack.Navigator initialRouteName="singup">
         <Stack.Screen
           options={{ headerShown: false }}
           name="singin"

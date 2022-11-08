@@ -29,7 +29,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-const CompleteProfile = () => {
+const CompleteProfile = ({navigation}) => {
   const {
     validationMessage,
     setValidationMessage,
@@ -238,12 +238,13 @@ const CompleteProfile = () => {
 
       <View className="flex flex-row justify-center">
         <TouchableOpacity
-          onPress={createAccount}
+          onPress={navigation.navigate("interest")}
           className="items-center mt-2 bg-[#075ADE] p-5 rounded-full rounded-full]"
         >
           <AntDesign name="arrowright" size={34} color="white" />
         </TouchableOpacity>
       </View>
+
       <ModalPopup
         setModalVisible={setModalVisible}
         modalVisible={modalVisible}
