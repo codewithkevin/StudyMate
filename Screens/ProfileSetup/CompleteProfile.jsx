@@ -78,15 +78,9 @@ const CompleteProfile = ({ navigation }) => {
   const name = route.params.name;
   const id = route.params.id;
 
-  const UserDeatails = {
-    dateExample: Timestamp.fromDate(new Date("December 10, 1815")),
-    accoutInfo: { email, password, name, purpose, gender, occupation, id },
-  };
-
   function checkerror(e) {
     e.preventdefault;
     navigation.navigate("interest", {
-      UserDeatails: UserDeatails,
       email: email,
       auth: auth,
       password: password,
@@ -96,7 +90,6 @@ const CompleteProfile = ({ navigation }) => {
       gender: gender,
       occupation: occupation,
     });
-    
   }
 
   return (

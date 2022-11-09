@@ -15,10 +15,45 @@ import { db } from "./../../firebase";
 import { useDetailsContext } from "./../../Hooks/useDetailsContext";
 
 const UserInterest = ({ navigation }) => {
-  const { game, interest, gamefun, cryptofun, crypto, sportfun, sport } =
-    useInterestContext();
+  const {
+    setGame,
+    game,
+    setInterest,
+    interest,
+    gamefun,
+    setCrypto,
+    cryptofun,
+    crypto,
+    sportfun,
+    sport,
+  } = useInterestContext();
 
-  const { setOccupation, setGender, setMale } = useDetailsContext();
+  const {
+    occupantfunction,
+    studentfuction,
+    occupant,
+    setOccupant,
+    student,
+    setStudent,
+    setOccupation,
+    unisex,
+    setUnisex,
+    unisexfunction,
+    female,
+    setFemale,
+    femalefunction,
+    malefunction,
+    setGender,
+    male,
+    setMale,
+    setPurpose,
+    selectedPurpose,
+    setSelectedPurpose,
+    studyselected,
+    setStudySelected,
+    friendshipfunction,
+    studyfunctions,
+  } = useDetailsContext();
 
   const {
     validationMessage,
@@ -43,7 +78,7 @@ const UserInterest = ({ navigation }) => {
   const purpose = route.params.purpose;
   const gender = route.params.gender;
   const occupation = route.params.occupation;
-  
+
   const UserDeatails = {
     dateExample: Timestamp.fromDate(new Date("December 10, 1815")),
     accoutInfo: {
@@ -66,10 +101,10 @@ const UserInterest = ({ navigation }) => {
       setEmail("");
       setName("");
       setPassword("");
-      
+      setInterest([]);
     } catch (error) {
       if (error) {
-        setValidationMessage(error);
+        setValidationMessage("Account Already Exists");
         setModalVisible(true);
       }
     }
