@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import { InterestContext } from "./../../Context/ProfileContext/InterestContext";
 
 const UserInterest = () => {
-  const { game, interest, gamefun } = useContext(InterestContext);
+  const { game, interest, gamefun, cryptofun, crypto, sportfun, sport } =
+    useContext(InterestContext);
 
   console.log(interest);
 
@@ -22,7 +23,7 @@ const UserInterest = () => {
         </Text>
       </View>
 
-      <View className="flex-row ml-5">
+      <View className="flex-row ml-5 space-x-3">
         <View className="flex-1">
           <TouchableOpacity
             onPress={gamefun}
@@ -30,7 +31,35 @@ const UserInterest = () => {
               game ? "border-slate-400" : "bg-[#075ADE]"
             } p-5  justify-center rounded-full items-center`}
           >
-            <Text className={`${game ? "text-black" : "text-white"}`}>Gaming</Text>
+            <Text className={`${game ? "text-black" : "text-white"}`}>
+              Gaming
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="flex-1">
+          <TouchableOpacity
+            onPress={cryptofun}
+            className={`border border-slate-400 ${
+              crypto ? "border-slate-400" : "bg-[#075ADE]"
+            } p-5  justify-center rounded-full items-center`}
+          >
+            <Text className={`${crypto ? "text-black" : "text-white"}`}>
+              Crypto
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="flex-1">
+          <TouchableOpacity
+            onPress={sportfun}
+            className={`border border-slate-400 ${
+              sport ? "border-slate-400" : "bg-[#075ADE]"
+            } p-5  justify-center rounded-full items-center`}
+          >
+            <Text className={`${sport ? "text-black" : "text-white"}`}>
+              Sport
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -7,6 +7,8 @@ const InterestContextProvider = (props) => {
   const initialState = [];
   const [interest, setInterest] = useState([]);
   const [game, setGame] = useState(false);
+  const [crypto, setCrypto] = useState(false);
+  const [sport, setSport] = useState(false);
 
   function gamefun(event) {
     event.preventDefault();
@@ -23,7 +25,45 @@ const InterestContextProvider = (props) => {
     }
   }
 
-  const values = { game, interest, gamefun };
+  function cryptofun(event) {
+    event.preventDefault();
+    if (crypto == true) {
+      setCrypto((current) => !current);
+      setInterest((current) => [...current, "crypto"]);
+    } else {
+      setCrypto((current) => !current);
+      setInterest((current) =>
+        current.filter((element) => {
+          return element !== "crypto";
+        })
+      );
+    }
+  }
+
+  function sportfun(event) {
+    event.preventDefault();
+    if (sport == true) {
+      setSport((current) => !current);
+      setInterest((current) => [...current, "sport"]);
+    } else {
+      setSport((current) => !current);
+      setInterest((current) =>
+        current.filter((element) => {
+          return element !== "sport";
+        })
+      );
+    }
+  }
+
+  const values = {
+    game,
+    interest,
+    gamefun,
+    cryptofun,
+    crypto,
+    sportfun,
+    sport,
+  };
 
   return (
     <InterestContext.Provider value={values}>
