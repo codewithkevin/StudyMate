@@ -6,9 +6,9 @@ export const InterestContext = React.createContext();
 const InterestContextProvider = (props) => {
   const initialState = [];
   const [interest, setInterest] = useState([]);
-  const [game, setGame] = useState(false);
-  const [crypto, setCrypto] = useState(false);
-  const [sport, setSport] = useState(false);
+  const [game, setGame] = useState(true);
+  const [crypto, setCrypto] = useState(true);
+  const [sport, setSport] = useState(true);
 
   function gamefun(event) {
     event.preventDefault();
