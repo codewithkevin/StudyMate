@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 export const InterestContext = React.createContext();
 
 const InterestContextProvider = (props) => {
-  const [interest, setInterest] = useState("");
+  const initialState = [];
+  const [interest, setInterest] = useState([]);
   const [game, setGame] = useState(false);
 
   function gamefun(event) {
@@ -14,6 +15,11 @@ const InterestContextProvider = (props) => {
       setInterest((current) => [...current, "game"]);
     } else {
       setGame((current) => !current);
+      setInterest((current) =>
+        current.filter((element) => {
+          return element !== "game";
+        })
+      );
     }
   }
 
