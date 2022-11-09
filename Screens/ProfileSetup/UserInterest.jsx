@@ -1,10 +1,11 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
 import { InterestContext } from "./../../Context/ProfileContext/InterestContext";
+import { useInterestContext } from "./../../Hooks/useInterestContext";
 
 const UserInterest = () => {
   const { game, interest, gamefun, cryptofun, crypto, sportfun, sport } =
-    useContext(InterestContext);
+    useInterestContext();
 
   console.log(interest);
 
