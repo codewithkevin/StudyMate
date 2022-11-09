@@ -14,7 +14,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import ModalPopup from "./../../Components/ModalPopup";
 
 //Context Import
-import { DetailsContext } from "./../../Context/ProfileContext/DetailsContext";
+import { useDetailsContext } from "./../../Hooks/useDetailsContext";
 import { ErrorContext } from "./../../Context/AuthContext/CheckError";
 
 //Firebase Support
@@ -29,7 +29,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-const CompleteProfile = ({navigation}) => {
+const CompleteProfile = ({ navigation }) => {
   const {
     validationMessage,
     setValidationMessage,
@@ -69,7 +69,7 @@ const CompleteProfile = ({navigation}) => {
     setStudySelected,
     friendshipfunction,
     studyfunctions,
-  } = useContext(DetailsContext);
+  } = useDetailsContext();
 
   //UseRoute is deprecated in favor of useNavigation
   const email = route.params.email;
@@ -83,18 +83,20 @@ const CompleteProfile = ({navigation}) => {
     accoutInfo: { email, password, name, purpose, gender, occupation, id },
   };
 
-  async function createAccount(event) {
-    event.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(db, "UserDeatils", id), UserDeatails);
-      alert("Welcome");
-    } catch (error) {
-      if (error) {
-        setValidationMessage("Account already exists");
-        setModalVisible(true);
-      }
-    }
+  function checkerror(e) {
+    e.preventdefault;
+    navigation.navigate("interest", {
+      UserDeatails: UserDeatails,
+      email: email,
+      auth: auth,
+      password: password,
+      name: name,
+      id: id,
+      purpose: purpose,
+      gender: gender,
+      occupation: occupation,
+    });
+    
   }
 
   return (
@@ -238,7 +240,7 @@ const CompleteProfile = ({navigation}) => {
 
       <View className="flex flex-row justify-center">
         <TouchableOpacity
-          onPress={navigation.navigate("interest")}
+          onPress={checkerror}
           className="items-center mt-2 bg-[#075ADE] p-5 rounded-full rounded-full]"
         >
           <AntDesign name="arrowright" size={34} color="white" />

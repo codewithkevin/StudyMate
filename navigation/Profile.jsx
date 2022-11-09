@@ -12,7 +12,7 @@ const ProfileStack = createNativeStackNavigator();
 
 export default function Profile() {
   return (
-    <ProfileStack.Navigator initialRouteName="interest">
+    <ProfileStack.Navigator initialRouteName="singup">
       <ProfileStack.Screen
         options={{ headerShown: false }}
         name="singup"
