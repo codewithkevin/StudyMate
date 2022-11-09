@@ -26,9 +26,11 @@ const UserInterest = () => {
         <View className="flex-1">
           <TouchableOpacity
             onPress={gamefun}
-            className="border border-slate-400 p-5  justify-center rounded-full items-center"
+            className={`border border-slate-400 ${
+              game ? "border-slate-400" : "bg-[#075ADE]"
+            } p-5  justify-center rounded-full items-center`}
           >
-            <Text>Gaming</Text>
+            <Text className={`${game ? "text-black" : "text-white"}`}>Gaming</Text>
           </TouchableOpacity>
         </View>
       </View>
