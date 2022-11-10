@@ -12,6 +12,7 @@ import LoadingScreen from "./Screens/LoadingScreen";
 //Context Calls
 import CheckErrorProvider from "./Context/AuthContext/CheckError";
 import DetailsProvider from "./Context/ProfileContext/DetailsContext";
+import InterestContextProvider from "./Context/ProfileContext/InterestContext"
 
 export default function App() {
   LogBox.ignoreAllLogs();
@@ -23,18 +24,20 @@ export default function App() {
   }, []);
 
   return (
-    <DetailsProvider>
-      <CheckErrorProvider>
-        <View className="flex-1">
-          {loading === false ? (
-            <View className="flex-1">
-              <RootNavigation />
-            </View>
-          ) : (
-            <LoadingScreen />
-          )}
-        </View>
-      </CheckErrorProvider>
-    </DetailsProvider>
+    <InterestContextProvider>
+      <DetailsProvider>
+        <CheckErrorProvider>
+          <View className="flex-1">
+            {loading === false ? (
+              <View className="flex-1">
+                <RootNavigation />
+              </View>
+            ) : (
+              <LoadingScreen />
+            )}
+          </View>
+        </CheckErrorProvider>
+      </DetailsProvider>
+    </InterestContextProvider>
   );
 }
