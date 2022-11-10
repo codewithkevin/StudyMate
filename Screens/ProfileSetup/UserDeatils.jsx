@@ -29,7 +29,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-const CompleteProfile = ({ navigation }) => {
+const UserDetails = ({ navigation }) => {
   const {
     validationMessage,
     setValidationMessage,
@@ -250,4 +250,4 @@ const CompleteProfile = ({ navigation }) => {
   );
 };
 
-export default CompleteProfile;
+export default UserDetails;
