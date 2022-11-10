@@ -29,7 +29,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-const CompleteProfile = ({ navigation }) => {
+const UserDetails = ({ navigation }) => {
   const {
     validationMessage,
     setValidationMessage,
@@ -80,16 +80,21 @@ const CompleteProfile = ({ navigation }) => {
 
   function checkerror(e) {
     e.preventdefault;
-    navigation.navigate("interest", {
-      email: email,
-      auth: auth,
-      password: password,
-      name: name,
-      id: id,
-      purpose: purpose,
-      gender: gender,
-      occupation: occupation,
-    });
+    if (gender === "" || purpose === "" || occupation === "") {
+      setValidationMessage("All fields are required");
+      setModalVisible(true);
+    } else {
+      navigation.navigate("interest", {
+        email: email,
+        auth: auth,
+        password: password,
+        name: name,
+        id: id,
+        purpose: purpose,
+        gender: gender,
+        occupation: occupation,
+      });
+    }
   }
 
   return (
@@ -250,4 +255,4 @@ const CompleteProfile = ({ navigation }) => {
   );
 };
 
-export default CompleteProfile;
+export default UserDetails;

@@ -3,10 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Screens Import 
-import CompleteProfile from './../Screens/ProfileSetup/CompleteProfile';
 import SignUpScreen from './../Screens/AuthScreen/SignUpScreen';
 import UserInterest from './../Screens/ProfileSetup/UserInterest';
 import UserBio from './../Screens/ProfileSetup/UserBio';
+import UserDetails from './../Screens/ProfileSetup/UserDeatils';
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -21,7 +21,7 @@ export default function Profile() {
       <ProfileStack.Screen
         options={{ headerShown: false }}
         name="profile"
-        component={CompleteProfile}
+        component={UserDetails}
       />
       <ProfileStack.Screen
         options={{ headerShown: false }}

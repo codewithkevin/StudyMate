@@ -80,7 +80,7 @@ const UserInterest = ({ navigation }) => {
 
   async function createAccount(event) {
     event.preventDefault();
-    if (interest.length >= 3) {
+    if (interest.length >= 2) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         await setDoc(doc(db, "UserDeatils", id), UserDeatails);
@@ -95,7 +95,8 @@ const UserInterest = ({ navigation }) => {
         }
       }
     } else {
-      alert("Select at least 3 interest");
+      setValidationMessage("Select at least 2 interest");
+      setModalVisible(true);
     }
   }
 
