@@ -16,6 +16,14 @@ import { useDetailsContext } from "./../../Hooks/useDetailsContext";
 
 const UserInterest = ({ navigation }) => {
   const {
+    tech,
+    music,
+    web,
+    art,
+    artfun,
+    webfun,
+    musicfun,
+    techfun,
     setGame,
     game,
     setInterest,
@@ -26,34 +34,11 @@ const UserInterest = ({ navigation }) => {
     crypto,
     sportfun,
     sport,
+    religion,
+    travelling,
+    travelfun,
+    religionfun,
   } = useInterestContext();
-
-  const {
-    occupantfunction,
-    studentfuction,
-    occupant,
-    setOccupant,
-    student,
-    setStudent,
-    setOccupation,
-    unisex,
-    setUnisex,
-    unisexfunction,
-    female,
-    setFemale,
-    femalefunction,
-    malefunction,
-    setGender,
-    male,
-    setMale,
-    setPurpose,
-    selectedPurpose,
-    setSelectedPurpose,
-    studyselected,
-    setStudySelected,
-    friendshipfunction,
-    studyfunctions,
-  } = useDetailsContext();
 
   const {
     validationMessage,
@@ -95,18 +80,22 @@ const UserInterest = ({ navigation }) => {
 
   async function createAccount(event) {
     event.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(db, "UserDeatils", id), UserDeatails);
-      setEmail("");
-      setName("");
-      setPassword("");
-      setInterest([]);
-    } catch (error) {
-      if (error) {
-        setValidationMessage("Account Already Exists");
-        setModalVisible(true);
+    if (interest.length >= 3) {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        await setDoc(doc(db, "UserDeatils", id), UserDeatails);
+        setEmail("");
+        setName("");
+        setPassword("");
+        setInterest([]);
+      } catch (error) {
+        if (error) {
+          setValidationMessage("Account Already Exists");
+          setModalVisible(true);
+        }
       }
+    } else {
+      alert("Select at least 3 interest");
     }
   }
 
@@ -127,7 +116,7 @@ const UserInterest = ({ navigation }) => {
         </Text>
       </View>
 
-      <View className="flex-row ml-5 space-x-3">
+      <View className="flex-row ml-5 space-x-3 mb-4">
         <View className="flex-1">
           <TouchableOpacity
             onPress={gamefun}
@@ -168,12 +157,78 @@ const UserInterest = ({ navigation }) => {
         </View>
       </View>
 
+      <View className="flex-row ml-5 space-x-3 mb-4">
+        <View className="flex-1">
+          <TouchableOpacity
+            onPress={techfun}
+            className={`border border-slate-400 ${
+              tech ? "border-slate-400" : "bg-[#075ADE]"
+            } p-5  justify-center rounded-full items-center`}
+          >
+            <Text className={`${tech ? "text-black" : "text-white"}`}>
+              Tech
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="flex-1">
+          <TouchableOpacity
+            onPress={musicfun}
+            className={`border border-slate-400 ${
+              music ? "border-slate-400" : "bg-[#075ADE]"
+            } p-5  justify-center rounded-full items-center`}
+          >
+            <Text className={`${music ? "text-black" : "text-white"}`}>
+              Music
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="flex-1">
+          <TouchableOpacity
+            onPress={artfun}
+            className={`border border-slate-400 ${
+              art ? "border-slate-400" : "bg-[#075ADE]"
+            } p-5  justify-center rounded-full items-center`}
+          >
+            <Text className={`${art ? "text-black" : "text-white"}`}>Art</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View className="flex-row ml-5 space-x-3 mb-24">
+        <View className="flex-1">
+          <TouchableOpacity
+            onPress={religionfun}
+            className={`border border-slate-400 ${
+              religion ? "border-slate-400" : "bg-[#075ADE]"
+            } p-5  justify-center rounded-full items-center`}
+          >
+            <Text className={`${religion ? "text-black" : "text-white"}`}>
+              Religious
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View className="flex-1">
+          <TouchableOpacity
+            onPress={travelfun}
+            className={`border border-slate-400 ${
+              travelling ? "border-slate-400" : "bg-[#075ADE]"
+            } p-5  justify-center rounded-full items-center`}
+          >
+            <Text className={`${travelling ? "text-black" : "text-white"}`}>
+              Travelling
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <View className="flex flex-row justify-center">
         <TouchableOpacity
           onPress={createAccount}
           className="items-center mt-2 bg-[#075ADE] p-5 rounded-full rounded-full]"
         >
-          <AntDesign name="arrowright" size={34} color="white" />
+          <Text className="text-md text-white font-bold">Create Account</Text>
         </TouchableOpacity>
       </View>
 
