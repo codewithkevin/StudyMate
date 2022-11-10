@@ -80,16 +80,21 @@ const UserDetails = ({ navigation }) => {
 
   function checkerror(e) {
     e.preventdefault;
-    navigation.navigate("interest", {
-      email: email,
-      auth: auth,
-      password: password,
-      name: name,
-      id: id,
-      purpose: purpose,
-      gender: gender,
-      occupation: occupation,
-    });
+    if (gender === "" || purpose === "" || occupation === "") {
+      setValidationMessage("All fields are required");
+      setModalVisible(true);
+    } else {
+      navigation.navigate("interest", {
+        email: email,
+        auth: auth,
+        password: password,
+        name: name,
+        id: id,
+        purpose: purpose,
+        gender: gender,
+        occupation: occupation,
+      });
+    }
   }
 
   return (
