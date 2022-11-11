@@ -29,7 +29,7 @@ const Header = () => {
       <View className="absolute top-[130] left-0 mt-10 ml-7 ...">
         <Image
           source={image1}
-          className="rounded-full w-[170] h-[170] mt-10 border-white border-4"
+          className="rounded-full w-[150] h-[150] mt-10 border-white border-4"
         />
       </View>
       <View className="absolute bg-blue-700 top-[300] right-0 mr-5 p-4 rounded-full">
