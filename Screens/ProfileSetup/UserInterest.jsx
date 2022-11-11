@@ -85,10 +85,6 @@ const UserInterest = ({ navigation }) => {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         await setDoc(doc(db, "UserDeatils", id), UserDeatails);
-        setEmail("");
-        setName("");
-        setPassword("");
-        setInterest([]);
       } catch (error) {
         if (error) {
           setValidationMessage("Account Already Exists");
@@ -99,6 +95,10 @@ const UserInterest = ({ navigation }) => {
       setValidationMessage("Select at least 2 interest");
       setModalVisible(true);
     }
+    setEmail("");
+    setName("");
+    setPassword("");
+    setInterest([]);
   }
 
   console.log(interest);
