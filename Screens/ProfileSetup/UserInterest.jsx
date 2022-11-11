@@ -123,7 +123,7 @@ const UserInterest = ({ navigation }) => {
             onPress={gamefun}
             className={`border border-slate-400 ${
               game ? "border-slate-400" : "bg-[#075ADE]"
-            } p-5  justify-center rounded-full items-center`}
+            } p-4  justify-center rounded-2xl items-center`}
           >
             <Text className={`${game ? "text-black" : "text-white"}`}>
               Gaming
@@ -136,7 +136,7 @@ const UserInterest = ({ navigation }) => {
             onPress={cryptofun}
             className={`border border-slate-400 ${
               crypto ? "border-slate-400" : "bg-[#075ADE]"
-            } p-5  justify-center rounded-full items-center`}
+            } p-4  justify-center rounded-2xl items-center`}
           >
             <Text className={`${crypto ? "text-black" : "text-white"}`}>
               Crypto
@@ -149,7 +149,7 @@ const UserInterest = ({ navigation }) => {
             onPress={sportfun}
             className={`border border-slate-400 ${
               sport ? "border-slate-400" : "bg-[#075ADE]"
-            } p-5  justify-center rounded-full items-center`}
+            } p-4  justify-center rounded-2xl items-center`}
           >
             <Text className={`${sport ? "text-black" : "text-white"}`}>
               Sport
@@ -164,7 +164,7 @@ const UserInterest = ({ navigation }) => {
             onPress={techfun}
             className={`border border-slate-400 ${
               tech ? "border-slate-400" : "bg-[#075ADE]"
-            } p-5  justify-center rounded-full items-center`}
+            } p-4  justify-center rounded-2xl items-center`}
           >
             <Text className={`${tech ? "text-black" : "text-white"}`}>
               Tech
@@ -177,7 +177,7 @@ const UserInterest = ({ navigation }) => {
             onPress={musicfun}
             className={`border border-slate-400 ${
               music ? "border-slate-400" : "bg-[#075ADE]"
-            } p-5  justify-center rounded-full items-center`}
+            } p-4  justify-center rounded-2xl items-center`}
           >
             <Text className={`${music ? "text-black" : "text-white"}`}>
               Music
@@ -190,7 +190,7 @@ const UserInterest = ({ navigation }) => {
             onPress={artfun}
             className={`border border-slate-400 ${
               art ? "border-slate-400" : "bg-[#075ADE]"
-            } p-5  justify-center rounded-full items-center`}
+            } p-4  justify-center rounded-2xl items-center`}
           >
             <Text className={`${art ? "text-black" : "text-white"}`}>Art</Text>
           </TouchableOpacity>
@@ -203,7 +203,7 @@ const UserInterest = ({ navigation }) => {
             onPress={religionfun}
             className={`border border-slate-400 ${
               religion ? "border-slate-400" : "bg-[#075ADE]"
-            } p-5  justify-center rounded-full items-center`}
+            } p-4  justify-center rounded-2xl items-center`}
           >
             <Text className={`${religion ? "text-black" : "text-white"}`}>
               Religious
@@ -215,7 +215,7 @@ const UserInterest = ({ navigation }) => {
             onPress={travelfun}
             className={`border border-slate-400 ${
               travelling ? "border-slate-400" : "bg-[#075ADE]"
-            } p-5  justify-center rounded-full items-center`}
+            } p-4  justify-center rounded-2xl items-center`}
           >
             <Text className={`${travelling ? "text-black" : "text-white"}`}>
               Travelling
@@ -227,7 +227,7 @@ const UserInterest = ({ navigation }) => {
       <View className="flex flex-row justify-center">
         <TouchableOpacity
           onPress={createAccount}
-          className="items-center mt-2 bg-[#075ADE] p-5 rounded-full rounded-full]"
+          className="items-center mt-2 bg-[#075ADE] p-5 rounded-2xl rounded-full]"
         >
           <Text className="text-md text-white font-bold">Create Account</Text>
         </TouchableOpacity>
@@ -239,6 +239,7 @@ const UserInterest = ({ navigation }) => {
         validationMessage={validationMessage}
         image={require(errorImage)}
       />
+      
     </View>
   );
 };
