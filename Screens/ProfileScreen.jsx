@@ -10,7 +10,7 @@ const ProfileScreen = () => {
     <View className="h-full w-full">
       <ScrollView>
         <Header />
-        <View className="mt-[130] ml-8 w-full mb-28">
+        <View className="mt-[120] ml-8 w-full mb-28">
           <UserBio />
           <UserInterest />
           <UserPost />

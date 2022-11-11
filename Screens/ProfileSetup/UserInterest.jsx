@@ -9,7 +9,7 @@ import ModalPopup from "./../../Components/ModalPopup";
 import { ErrorContext } from "./../../Context/AuthContext/CheckError";
 
 //Firebase Support
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { doc, setDoc, Timestamp, collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "./../../firebase";
 import { useDetailsContext } from "./../../Hooks/useDetailsContext";
@@ -63,20 +63,16 @@ const UserInterest = ({ navigation }) => {
   const purpose = route.params.purpose;
   const gender = route.params.gender;
   const occupation = route.params.occupation;
-  const authId = auth.uid;
 
   const UserDeatails = {
-    dateExample: Timestamp.fromDate(new Date("December 10, 1815")),
-    accoutInfo: {
-      email,
-      password,
-      name,
-      purpose,
-      gender,
-      occupation,
-      id,
-      interest,
-    },
+    email,
+    password,
+    name,
+    purpose,
+    gender,
+    occupation,
+    id,
+    interest,
   };
 
   async function createAccount(event) {
@@ -84,7 +80,7 @@ const UserInterest = ({ navigation }) => {
     if (interest.length >= 2) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        await setDoc(doc(db, "UserDeatils", id), UserDeatails);
+        await setDoc(doc(db, `${email}`, id), UserDeatails);
       } catch (error) {
         if (error) {
           setValidationMessage("Account Already Exists");

@@ -32,7 +32,7 @@ const Header = () => {
           className="rounded-full w-[150] h-[150] mt-10 border-white border-4"
         />
       </View>
-      <View className="absolute bg-blue-700 top-[300] right-0 mr-5 p-4 rounded-full">
+      <View className="absolute bg-blue-700 top-[300] right-0 mr-5 p-4 rounded-xl">
         <TouchableOpacity
           onPress={() => navigation.navigate("settings")}
           className="items-center "
