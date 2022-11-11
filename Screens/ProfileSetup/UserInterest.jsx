@@ -63,6 +63,7 @@ const UserInterest = ({ navigation }) => {
   const purpose = route.params.purpose;
   const gender = route.params.gender;
   const occupation = route.params.occupation;
+  const authId = auth.uid;
 
   const UserDeatails = {
     dateExample: Timestamp.fromDate(new Date("December 10, 1815")),
@@ -239,7 +240,6 @@ const UserInterest = ({ navigation }) => {
         validationMessage={validationMessage}
         image={require(errorImage)}
       />
-      
     </View>
   );
 };
