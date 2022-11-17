@@ -35,7 +35,23 @@ const UserInterest = () => {
   return (
     <View className="mt-5 mb-10">
       <Text className="text-xl">Interests</Text>
-      
+      <View className="flex flex-row mt-3 space-x-5">
+        <View className="rounded-lg border p-3">
+          <TouchableOpacity className="items-center">
+            <Text className="font-normal ">{interest.interest[0]}</Text>
+          </TouchableOpacity>
+        </View>
+        <View className="rounded-lg border p-3">
+          <TouchableOpacity className="items-center">
+            <Text className="font-normal ">{interest.interest[1]}</Text>
+          </TouchableOpacity>
+        </View>
+        <View className="rounded-lg border p-3">
+          <TouchableOpacity className="items-center">
+            <Text className="font-normal ">{interest.interest[2]}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
