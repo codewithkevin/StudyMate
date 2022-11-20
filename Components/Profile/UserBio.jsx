@@ -37,7 +37,7 @@ const UserBio = () => {
   console.log(names);
 
   return (
-    <View className="w-[90%]">
+    <View className="w-[91%]">
       <View className="mb-3">
         <Text className="text-xl font-medium font-mono">{names.name}</Text>
       </View>
